@@ -1,10 +1,25 @@
 part of 'splash_bloc.dart';
 
-abstract class SplashState extends Equatable {
-  const SplashState();
-}
+class SplashState extends Equatable {
+  final int page;
+  const SplashState({required this.page});
 
-class SplashInitial extends SplashState {
+  factory SplashState.initial()=> const SplashState(page: 0);
+
+
   @override
   List<Object> get props => [];
+
+
+
+
+  SplashState copyWith({
+    int? page,
+  }) {
+    return SplashState(
+      page: page ?? this.page,
+    );
+  }
 }
+
+

@@ -1,5 +1,7 @@
 import 'package:edu_guru/constants/color.dart';
+import 'package:edu_guru/pages/main/authentication/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,70 +16,24 @@ class _SplashScreenState extends State<SplashScreen> {
   var currentPage = 0;
 
   List<Widget> pages = [
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Image.asset('assets/images/sp1.png'),
-        const Text(
-          'Page One',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 20),
-        const Text(
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel',
-        ),
-        const SizedBox(height: 20),
-      ],
+    _page(
+      imgUrl: 'assets/images/sp1.png',
+      title: 'Page One',
+      description: 'Lorem ipsum dolor sit amet consecrate adipisicing elite.',
     ),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Image.asset('assets/images/sp2.png'),
-        const Text(
-          'Page Two',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 20),
-        const Text(
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel',
-        ),
-      ],
+    _page(
+      imgUrl: 'assets/images/sp2.png',
+      title: 'Page Two',
+      description: 'Lorem ipsum dolor sit amet consecrate adipisicing elite. ',
     ),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Image.asset('assets/images/sp3.png'),
-        const Text(
-          'Page Three',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 20),
-        const Text(
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel',
-        ),
-      ],
+    _page(
+      imgUrl: 'assets/images/sp3.png',
+      title: 'Page Three',
+      description: 'Lorem ipsum dolor sit amet consecrate adipisicing elite. ',
     ),
   ];
 
-  // next slide
+// next slide
   void next() {
     pageController.animateToPage(
       currentPage + 1,
@@ -86,15 +42,20 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  // launch app
+// launch app
   void launch() {
     // Todo: implement launch
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
   }
 
-  // skip slides
+// skip slides
   void skip() {
     pageController.animateToPage(
-      pages.length -1,
+      pages.length - 1,
       duration: const Duration(seconds: 1),
       curve: Curves.easeIn,
     );
@@ -108,15 +69,17 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-         currentPage != pages.length -1? TextButton(
-            onPressed: () => skip(),
-            child: const Text(
-              'Skip',
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-          ): const SizedBox.shrink()
+          currentPage != pages.length - 1
+              ? TextButton(
+                  onPressed: () => skip(),
+                  child: const Text(
+                    'Skip',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink()
         ],
       ),
       body: Padding(
@@ -172,3 +135,33 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
+// page
+Widget _page({
+  required String imgUrl,
+  required String title,
+  required String description,
+}) =>
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Image.asset(imgUrl),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24.sp,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          description,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 14.sp),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );

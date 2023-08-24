@@ -20,7 +20,9 @@ class EduGuru extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SplashBloc()),
+        BlocProvider(
+          create: (context) => SplashBloc(),
+        ),
       ],
       child: ScreenUtilInit(
         builder: (context, child) => const MaterialApp(

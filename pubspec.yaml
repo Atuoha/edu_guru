@@ -40,6 +40,8 @@ dependencies:
   flutter_screenutil: ^5.8.4
   flutter_cache_manager: ^3.3.1
   smooth_page_indicator: ^1.1.0
+  intl: ^0.18.1
+  cloud_firestore: ^4.9.0
 
 
 dev_dependencies:
@@ -68,6 +70,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
+    - assets/voice/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
