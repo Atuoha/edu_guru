@@ -1,4 +1,5 @@
 import 'package:edu_guru/business_logic/splash/splash_bloc.dart';
+import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/splash/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,9 +26,18 @@ class EduGuru extends StatelessWidget {
         ),
       ],
       child: ScreenUtilInit(
-        builder: (context, child) => const MaterialApp(
+        builder: (context, child) => MaterialApp(
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              color: Colors.transparent,
+              elevation: 0,
+            ),
+          ),
           debugShowCheckedModeBanner: false,
-          home: EntryScreen(),
+          home: const EntryScreen(),
+          routes: {
+            'login': (context) => const SignInScreen(),
+          },
         ),
       ),
     );

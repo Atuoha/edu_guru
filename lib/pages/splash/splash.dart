@@ -1,5 +1,5 @@
 import 'package:edu_guru/constants/color.dart';
-import 'package:edu_guru/pages/main/authentication/login.dart';
+import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -37,19 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void next() {
     pageController.animateToPage(
       currentPage + 1,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.easeIn,
     );
   }
 
 // launch app
   void launch() {
-    // Todo: implement launch
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+    Navigator.of(context).pushNamedAndRemoveUntil('login', (route) => false);
   }
 
 // skip slides
