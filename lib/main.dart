@@ -32,6 +32,7 @@ class EduGuru extends StatelessWidget {
               color: Colors.transparent,
               elevation: 0,
             ),
+            fontFamily: 'Avenir'
           ),
           debugShowCheckedModeBanner: false,
           home: const EntryScreen(),

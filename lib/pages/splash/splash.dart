@@ -105,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 activeDotDecoration: DotDecoration(
                   width: 25,
                   height: 3,
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 dotDecoration: DotDecoration(
@@ -117,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryColor),
               onPressed: () =>
                   currentPage != pages.length - 1 ? next() : launch(),
               child: Text(

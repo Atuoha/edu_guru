@@ -1,7 +1,6 @@
 import 'package:edu_guru/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../widgets/third_party_logins.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -17,8 +16,17 @@ class _SignInScreenState extends State<SignInScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isPasswordObscured = true;
 
-  void submitCreds() {
-    // Todo: Implement login
+  void signUpHandler() {
+    bool valid = formKey.currentState!.validate();
+    if(!valid){
+      return;
+    }
+    // Todo: Implement sign in
+  }
+
+
+  navigateToSIgnUp() {
+    // Todo: navigate to to signup
   }
 
   @override
@@ -35,9 +43,9 @@ class _SignInScreenState extends State<SignInScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Login',
+          'Sign In',
           style: TextStyle(
-            color: Colors.black,
+            color: AppColors.primaryText,
             fontSize: 16.sp,
           ),
         ),
@@ -71,6 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       controller: emailController,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
                       validator: (value){
                         if(value!.isEmpty || !value.contains('@')){
                           return 'Email is not valid';
@@ -91,14 +100,28 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryFourElementText,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.3),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryFourElementText,
+                          ),
+                        ),
+
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryElementBg,
+                          ),
+                        ),
+
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryElementBg,
                           ),
                         ),
                       ),
@@ -146,14 +169,26 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: Colors.grey.withOpacity(0.3),
+                    borderSide: const BorderSide(
+                      color: AppColors.primaryFourElementText,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: Colors.grey.withOpacity(0.3),
+                    borderSide: const BorderSide(
+                      color: AppColors.primaryFourElementText,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: const BorderSide(
+                      color: AppColors.primaryElementBg,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: const BorderSide(
+                      color: AppColors.primaryElementBg,
                     ),
                   ),
                 ),
@@ -176,38 +211,48 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    color: Colors.white,
+            GestureDetector(
+              onTap: ()=>signUpHandler(),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child:  Center(
+                  child: Text(
+                    'Sign in',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.normal
+                    ),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Colors.grey.withOpacity(0.3),
+            GestureDetector(
+              onTap: ()=>navigateToSIgnUp(),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: AppColors.primaryFourElementText,
+                  ),
                 ),
-              ),
-              child: const Center(
-                child: Text(
-                  'Sign up',
-                  style: TextStyle(
-                    color: Colors.black,
+                child:  Center(
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                      color: AppColors.primaryText,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.normal
+                    ),
                   ),
                 ),
               ),
@@ -218,4 +263,6 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
+
 }
