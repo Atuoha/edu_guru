@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "110367483360",
+    "project_id": "eduguru-a9aff",
+    "storage_bucket": "eduguru-a9aff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110367483360:android:02e0c6cac62a98840a7785",
+        "android_client_info": {
+          "package_name": "com.example.edu_guru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110367483360-1h33f8io4s7vacp99l9fu9jgi2fun07u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkDOX6YLgQlK65XsCQH01y7u149US5ml0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110367483360-1h33f8io4s7vacp99l9fu9jgi2fun07u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

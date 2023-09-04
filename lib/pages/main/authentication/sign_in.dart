@@ -1,5 +1,9 @@
+import 'package:edu_guru/business_logic/sign_in/sign_in_bloc.dart';
 import 'package:edu_guru/constants/color.dart';
+import 'package:edu_guru/constants/enums/signin_type.dart';
+import 'package:edu_guru/repositories/authentication_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/third_party_logins.dart';
 
@@ -18,12 +22,13 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void signUpHandler() {
     bool valid = formKey.currentState!.validate();
-    if(!valid){
+    if (!valid) {
       return;
     }
+
+    context.read<AuthenticationRepo>().handleSignIn(SignInType.email);
     // Todo: Implement sign in
   }
-
 
   navigateToSIgnUp() {
     // Todo: navigate to to signup
@@ -80,8 +85,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
-                      validator: (value){
-                        if(value!.isEmpty || !value.contains('@')){
+                      onFieldSubmitted: (value) {
+                        context.read<SignInBloc>().add(
+                              EmailEvent(
+                                emailController.text.trim(),
+                              ),
+                            );
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty || !value.contains('@')) {
                           return 'Email is not valid';
                         }
                         return null;
@@ -110,14 +122,12 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: AppColors.primaryFourElementText,
                           ),
                         ),
-
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(
                             color: AppColors.primaryElementBg,
                           ),
                         ),
-
                         focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(
@@ -134,8 +144,15 @@ class _SignInScreenState extends State<SignInScreen> {
                 controller: passwordController,
                 obscureText: isPasswordObscured,
                 textInputAction: TextInputAction.done,
-                validator: (value){
-                  if(value!.isEmpty || value.length < 8){
+                onFieldSubmitted: (value) {
+                  context.read<SignInBloc>().add(
+                        PasswordEvent(
+                          passwordController.text.trim(),
+                        ),
+                      );
+                },
+                validator: (value) {
+                  if (value!.isEmpty || value.length < 8) {
                     return 'Password is not valid';
                   }
                   return null;
@@ -212,7 +229,7 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
-              onTap: ()=>signUpHandler(),
+              onTap: () => signUpHandler(),
               child: Container(
                 height: 50,
                 width: double.infinity,
@@ -220,13 +237,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child:  Center(
+                child: Center(
                   child: Text(
                     'Sign in',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.normal
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -234,7 +251,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: ()=>navigateToSIgnUp(),
+              onTap: () => navigateToSIgnUp(),
               child: Container(
                 height: 50,
                 width: double.infinity,
@@ -245,14 +262,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     color: AppColors.primaryFourElementText,
                   ),
                 ),
-                child:  Center(
+                child: Center(
                   child: Text(
                     'Sign up',
                     style: TextStyle(
-                      color: AppColors.primaryText,
+                        color: AppColors.primaryText,
                         fontSize: 16.sp,
-                        fontWeight: FontWeight.normal
-                    ),
+                        fontWeight: FontWeight.normal),
                   ),
                 ),
               ),
@@ -263,6 +279,4 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
-
-
 }
