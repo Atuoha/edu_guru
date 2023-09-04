@@ -47,15 +47,17 @@ class AuthenticationRepo {
             var user = credential.user;
 
             if(user != null){
-              // user is verified
+              // user is verified!
             }else{
 
             }
 
           }catch(e){
+            // error
             if (kDebugMode) {
               print(e);
             }
+
           }
 
           break;
