@@ -30,41 +30,31 @@ class EduGuru extends StatelessWidget {
       ),
     );
 
-    return MultiRepositoryProvider(
+    return MultiBlocProvider(
       providers: [
-        // auth repo
-        RepositoryProvider(
-          create: (context) => AuthenticationRepo(context: context),
+        // splash bloc
+        BlocProvider(
+          create: (context) => SplashBloc(),
+        ),
+
+        // sign in bloc
+        BlocProvider(
+          create: (context) => SignInBloc(),
         )
       ],
-      child: MultiBlocProvider(
-        providers: [
-          // splash bloc
-          BlocProvider(
-            create: (context) => SplashBloc(),
-          ),
-
-          // sign in bloc
-          BlocProvider(
-            create: (context) => SignInBloc(
-              authRepo: context.read<AuthenticationRepo>(),
-            ),
-          )
-        ],
-        child: ScreenUtilInit(
-          builder: (context, child) => MaterialApp(
-            theme: ThemeData(
-                appBarTheme: const AppBarTheme(
-                  color: Colors.transparent,
-                  elevation: 0,
-                ),
-                fontFamily: 'Avenir'),
-            debugShowCheckedModeBanner: false,
-            home: const EntryScreen(),
-            routes: {
-              'login': (context) => const SignInScreen(),
-            },
-          ),
+      child: ScreenUtilInit(
+        builder: (context, child) => MaterialApp(
+          theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                color: Colors.transparent,
+                elevation: 0,
+              ),
+              fontFamily: 'Avenir'),
+          debugShowCheckedModeBanner: false,
+          home: const EntryScreen(),
+          routes: {
+            'login': (context) => const SignInScreen(),
+          },
         ),
       ),
     );

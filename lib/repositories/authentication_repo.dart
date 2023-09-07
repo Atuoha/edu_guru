@@ -1,4 +1,3 @@
-
 import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,64 +12,67 @@ class AuthenticationRepo {
   AuthenticationRepo({required this.context});
 
   void handleSignIn(SignInType type) async {
-      switch (type) {
-        case SignInType.email:
-          final state = context.read<SignInBloc>().state;
-          String email = state.email;
-          String password = state.password;
+    switch (type) {
+      case SignInType.email:
+        final state = context.read<SignInBloc>().state;
+        String email = state.email;
+        String password = state.password;
 
+        print('Email:$email | Password $password');
 
-          if (email.isEmpty) {
+        try {
+          UserCredential credential =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+
+          if (credential.user == null) {
             //
           }
-          if (password.isEmpty) {
+
+          if (!credential.user!.emailVerified) {
             //
           }
 
+          var user = credential.user;
 
-          try{
-            UserCredential credential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-              email: email,
-              password: password,
-            );
-
-            if(credential.user == null){
-              //
+          if (user != null) {
+            // user is verified!
+          } else {}
+        } on FirebaseAuthException catch (e) {
+          String error = "Error occurred!";
+          if (e.message != null) {
+            if (e.code == 'user-not-found') {
+              error = "Email not recognised!";
+            } else if (e.code == 'account-exists-with-different-credential') {
+              error = "Email already in use!";
+            } else if (e.code == 'wrong-password') {
+              error = 'Email or Password Incorrect!';
+            } else if (e.code == 'network-request-failed') {
+              error = 'Network error!';
+            } else {
+              error = e.code;
             }
-
-
-            if(!credential.user!.emailVerified){
-              //
-            }
-
-            var user = credential.user;
-
-            if(user != null){
-              // user is verified!
-            }else{
-
-            }
-
-          }catch(e){
-            // error
-            if (kDebugMode) {
-              print(e);
-            }
-
           }
+          print(error);
+        } catch (e) {
+          // error
+          if (kDebugMode) {
+            print(e);
+          }
+        }
 
-          break;
+        break;
 
-        case SignInType.facebook:
-          break;
+      case SignInType.facebook:
+        break;
 
-        case SignInType.apple:
-          break;
+      case SignInType.apple:
+        break;
 
-        case SignInType.google:
-          break;
-      }
-
+      case SignInType.google:
+        break;
+    }
   }
 }

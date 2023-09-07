@@ -10,8 +10,7 @@ part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final AuthenticationRepo authRepo;
-  SignInBloc({required this.authRepo}) : super(SignInState.initial()) {
+  SignInBloc() : super(SignInState.initial()) {
 
     on<SignInEvent>((event, emit) {
       // TODO: implement event handler

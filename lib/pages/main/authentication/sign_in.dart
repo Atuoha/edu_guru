@@ -26,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
       return;
     }
 
-    context.read<AuthenticationRepo>().handleSignIn(SignInType.email);
+    AuthenticationRepo(context: context).handleSignIn(SignInType.email);
     // Todo: Implement sign in
   }
 
@@ -56,172 +56,187 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 18,
-          vertical: 10,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ThirdPartyLogin(),
-              const SizedBox(height: 10),
-              Center(
-                child: Text(
-                  'or use your email account login',
-                  style: TextStyle(
-                    color: Colors.grey.withOpacity(0.3),
+      body: BlocBuilder<SignInBloc, SignInState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 18,
+              vertical: 10,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const ThirdPartyLogin(),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: Text(
+                      'or use your email account login',
+                      style: TextStyle(
+                        color: Colors.grey.withOpacity(0.3),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 50),
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: emailController,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      onFieldSubmitted: (value) {
-                        context.read<SignInBloc>().add(
+                  const SizedBox(height: 50),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: emailController,
+                          autofocus: true,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.emailAddress,
+                          onFieldSubmitted: (value) {
+                            context.read<SignInBloc>().add(
+                                  EmailEvent(
+                                    emailController.text.trim(),
+                                  ),
+                                );
+
+                            print(emailController);
+                          },
+
+                          onChanged: (value) {
+                            context.read<SignInBloc>().add(
                               EmailEvent(
                                 emailController.text.trim(),
                               ),
                             );
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty || !value.contains('@')) {
-                          return 'Email is not valid';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Colors.black,
-                        ),
-                        hintText: 'johndoe@gmail.com',
-                        label: const Text(
-                          'Email',
-                          style: TextStyle(
-                            color: Colors.grey,
+
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty || !value.contains('@')) {
+                              return 'Email is not valid';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              Icons.email,
+                              color: Colors.black,
+                            ),
+                            hintText: 'johndoe@gmail.com',
+                            label: const Text(
+                              'Email',
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: AppColors.primaryFourElementText,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: AppColors.primaryFourElementText,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: AppColors.primaryElementBg,
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: AppColors.primaryElementBg,
+                              ),
+                            ),
                           ),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryFourElementText,
-                          ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: isPasswordObscured,
+                    textInputAction: TextInputAction.done,
+                    onChanged: (value) {
+                      context.read<SignInBloc>().add(
+                            PasswordEvent(
+                              passwordController.text.trim(),
+                            ),
+                          );
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty || value.length < 8) {
+                        return 'Password is not valid';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      suffixIcon: passwordController.text.isNotEmpty
+                          ? GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isPasswordObscured = !isPasswordObscured;
+                                });
+                              },
+                              child: Icon(
+                                isPasswordObscured
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.black,
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                      prefixIcon: const Icon(
+                        Icons.key,
+                        color: Colors.black,
+                      ),
+                      hintText: '*******',
+                      label: const Text(
+                        'Password',
+                        style: TextStyle(
+                          color: Colors.grey,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryFourElementText,
-                          ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: AppColors.primaryFourElementText,
                         ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryElementBg,
-                          ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: AppColors.primaryFourElementText,
                         ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryElementBg,
-                          ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: AppColors.primaryElementBg,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: AppColors.primaryElementBg,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  TextButton(
+                    onPressed: () => {},
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: passwordController,
-                obscureText: isPasswordObscured,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (value) {
-                  context.read<SignInBloc>().add(
-                        PasswordEvent(
-                          passwordController.text.trim(),
-                        ),
-                      );
-                },
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 8) {
-                    return 'Password is not valid';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  suffixIcon: passwordController.text.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isPasswordObscured = !isPasswordObscured;
-                            });
-                          },
-                          child: Icon(
-                            isPasswordObscured
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.black,
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                  prefixIcon: const Icon(
-                    Icons.key,
-                    color: Colors.black,
-                  ),
-                  hintText: '*******',
-                  label: const Text(
-                    'Password',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryFourElementText,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryFourElementText,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryElementBg,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryElementBg,
-                    ),
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () => {},
-                child: const Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
