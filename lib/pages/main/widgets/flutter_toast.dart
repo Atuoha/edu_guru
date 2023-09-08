@@ -7,8 +7,11 @@ toastInfo({
   required String msg,
   required Status status,
 }) {
-  Fluttertoast.showToast(
+  return Fluttertoast.showToast(
     msg: msg,
     backgroundColor: status == Status.error ? Colors.red : Colors.green,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.TOP,
+    timeInSecForIosWeb: 2,
   );
 }

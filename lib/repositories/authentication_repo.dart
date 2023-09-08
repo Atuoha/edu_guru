@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../business_logic/sign_in/sign_in_bloc.dart';
+import '../constants/enums/status.dart';
+import '../pages/main/widgets/flutter_toast.dart';
 
 class AuthenticationRepo {
   final BuildContext context;
@@ -27,18 +29,15 @@ class AuthenticationRepo {
             password: password,
           );
 
-          if (credential.user == null) {
-            //
-          }
-
           if (!credential.user!.emailVerified) {
             //
+            toastInfo(msg: 'Ops! Email not verified!', status: Status.error);
           }
 
           var user = credential.user;
 
           if (user != null) {
-            // user is verified!
+            // user is not null!
           } else {}
         } on FirebaseAuthException catch (e) {
           String error = "Error occurred!";
@@ -55,6 +54,8 @@ class AuthenticationRepo {
               error = e.code;
             }
           }
+          toastInfo(msg: 'Ops! $error', status: Status.error);
+
           print(error);
         } catch (e) {
           // error
