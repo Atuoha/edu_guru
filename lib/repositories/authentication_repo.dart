@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
@@ -87,20 +89,27 @@ class AuthenticationRepo {
         password: password,
       );
 
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(credential.user!.uid)
-          .set({
-        'user_id': credential.user!.uid,
-        'email': email,
+      var user = credential.user;
+
+      if (user != null) {
+        user.sendEmailVerification();
+        user.updateDisplayName(username);
+        user.updateEmail(email);
+      }
+
+      await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
+        'user_id': user.uid,
+        'email': user.email,
         'username': username,
       });
 
       toastInfo(
-          msg: 'Kudos! Account created successfully!', status: Status.success);
+        msg: 'Success! Account created. Check your email for verification.',
+        status: Status.success,
+      );
 
-
-      var user = credential.user;
+      Future.delayed(const Duration(seconds: 3));
+      navigateBack();
     } on FirebaseAuthException catch (e) {
       String error = "Error occurred!";
       if (e.message != null) {
@@ -127,5 +136,9 @@ class AuthenticationRepo {
         print(e);
       }
     }
+  }
+
+  void navigateBack() {
+    Navigator.of(context).pop();
   }
 }
