@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../common/routes/app_routes.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -44,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
 // launch app
   void launch() {
-    Navigator.of(context).pushNamedAndRemoveUntil('login', (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(AppRoute.signInScreen, (route) => false);
   }
 
 // skip slides

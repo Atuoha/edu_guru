@@ -8,13 +8,13 @@ class SignInEvent extends Equatable {
 }
 
 
-class EmailEvent extends SignInEvent{
+class SignInEmailEvent extends SignInEvent{
   final String email;
-  const EmailEvent(this.email);
+  const SignInEmailEvent(this.email);
 }
 
 
-class PasswordEvent extends SignInEvent{
+class SignInPasswordEvent extends SignInEvent{
   final String password;
-  const PasswordEvent(this.password);
+  const SignInPasswordEvent(this.password);
 }

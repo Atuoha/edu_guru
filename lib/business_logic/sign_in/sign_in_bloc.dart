@@ -16,16 +16,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       // TODO: implement event handler
     });
 
-    on<EmailEvent>(_emailEmitter);
+    on<SignInEmailEvent>(_emailEmitter);
 
-    on<PasswordEvent>(_passwordEmitter);
+    on<SignInPasswordEvent>(_passwordEmitter);
   }
 
-  void _emailEmitter(EmailEvent event, Emitter<SignInState> emit) {
+  void _emailEmitter(SignInEmailEvent event, Emitter<SignInState> emit) {
     emit(state.copyWith(email: event.email));
   }
 
-  void _passwordEmitter(PasswordEvent event, Emitter<SignInState> emit) {
+  void _passwordEmitter(SignInPasswordEvent event, Emitter<SignInState> emit) {
     emit(state.copyWith(password: event.password));
   }
 

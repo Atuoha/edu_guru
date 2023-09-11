@@ -1,8 +1,7 @@
-import 'package:edu_guru/business_logic/sign_in/sign_in_bloc.dart';
-import 'package:edu_guru/business_logic/splash/splash_bloc.dart';
+import 'package:edu_guru/common/app_bloc_providers/app_bloc_providers.dart';
+import 'package:edu_guru/common/routes/app_routes.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/splash/entry.dart';
-import 'package:edu_guru/repositories/repos.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +21,10 @@ Future<void> main() async {
 class EduGuru extends StatelessWidget {
   const EduGuru({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -31,30 +32,19 @@ class EduGuru extends StatelessWidget {
     );
 
     return MultiBlocProvider(
-      providers: [
-        // splash bloc
-        BlocProvider(
-          create: (context) => SplashBloc(),
-        ),
-
-        // sign in bloc
-        BlocProvider(
-          create: (context) => SignInBloc(),
-        )
-      ],
+      providers: AppBlocProviders.allBlocProviders,
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                color: Colors.transparent,
-                elevation: 0,
-              ),
-              fontFamily: 'Avenir'),
+            appBarTheme: const AppBarTheme(
+              color: Colors.transparent,
+              elevation: 0,
+            ),
+            fontFamily: 'Avenir',
+          ),
           debugShowCheckedModeBanner: false,
           home: const EntryScreen(),
-          routes: {
-            'login': (context) => const SignInScreen(),
-          },
+          routes: routes
         ),
       ),
     );

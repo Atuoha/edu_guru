@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,9 +21,6 @@ class AuthenticationRepo {
         final state = context.read<SignInBloc>().state;
         String email = state.email;
         String password = state.password;
-
-        print('Email:$email | Password $password');
-
         try {
           UserCredential credential =
               await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -35,10 +34,6 @@ class AuthenticationRepo {
           }
 
           var user = credential.user;
-
-          if (user != null) {
-            // user is not null!
-          } else {}
         } on FirebaseAuthException catch (e) {
           String error = "Error occurred!";
           if (e.message != null) {
@@ -56,7 +51,9 @@ class AuthenticationRepo {
           }
           toastInfo(msg: 'Ops! $error', status: Status.error);
 
-          print(error);
+          if (kDebugMode) {
+            print(error);
+          }
         } catch (e) {
           // error
           if (kDebugMode) {
@@ -74,6 +71,61 @@ class AuthenticationRepo {
 
       case SignInType.google:
         break;
+    }
+  }
+
+  void handleSignUp() async {
+    final state = context.read<SignUpBloc>().state;
+    final email = state.email;
+    final username = state.username;
+    final password = state.password;
+
+    try {
+      UserCredential credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(credential.user!.uid)
+          .set({
+        'user_id': credential.user!.uid,
+        'email': email,
+        'username': username,
+      });
+
+      toastInfo(
+          msg: 'Kudos! Account created successfully!', status: Status.success);
+
+
+      var user = credential.user;
+    } on FirebaseAuthException catch (e) {
+      String error = "Error occurred!";
+      if (e.message != null) {
+        if (e.code == 'user-not-found') {
+          error = "Email not recognised!";
+        } else if (e.code == 'account-exists-with-different-credential') {
+          error = "Email already in use!";
+        } else if (e.code == 'wrong-password') {
+          error = 'Email or Password Incorrect!';
+        } else if (e.code == 'network-request-failed') {
+          error = 'Network error!';
+        } else {
+          error = e.code;
+        }
+      }
+      toastInfo(msg: 'Ops! $error', status: Status.error);
+
+      if (kDebugMode) {
+        print(error);
+      }
+    } catch (e) {
+      // error
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

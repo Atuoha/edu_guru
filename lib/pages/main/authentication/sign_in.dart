@@ -6,6 +6,7 @@ import 'package:edu_guru/repositories/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../common/routes/app_routes.dart';
 import '../../../constants/enums/status.dart';
 import '../widgets/third_party_logins.dart';
 
@@ -22,7 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isPasswordObscured = true;
 
-  void signUpHandler() {
+  void signInHandler() {
     FocusScope.of(context).unfocus();
     var valid = _formKey.currentState!.validate();
     _formKey.currentState!.save();
@@ -36,7 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   navigateToSIgnUp() {
-    // Todo: navigate to to signup
+    Navigator.of(context).pushNamed(AppRoute.signUpScreen);
   }
 
   @override
@@ -76,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 10),
                   Center(
                     child: Text(
-                      'or use your email account login',
+                      'or use your email account to sign in',
                       style: TextStyle(
                         color: Colors.grey.withOpacity(0.3),
                       ),
@@ -94,11 +95,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           keyboardType: TextInputType.emailAddress,
                           onChanged: (value) {
                             context.read<SignInBloc>().add(
-                              EmailEvent(
-                                emailController.text.trim(),
-                              ),
-                            );
-
+                                  SignInEmailEvent(
+                                    emailController.text.trim(),
+                                  ),
+                                );
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -155,10 +155,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           textInputAction: TextInputAction.done,
                           onChanged: (value) {
                             context.read<SignInBloc>().add(
-                              PasswordEvent(
-                                passwordController.text.trim(),
-                              ),
-                            );
+                                  SignInPasswordEvent(
+                                    passwordController.text.trim(),
+                                  ),
+                                );
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -173,18 +173,19 @@ class _SignInScreenState extends State<SignInScreen> {
                           decoration: InputDecoration(
                             suffixIcon: passwordController.text.isNotEmpty
                                 ? GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isPasswordObscured = !isPasswordObscured;
-                                });
-                              },
-                              child: Icon(
-                                isPasswordObscured
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
-                              ),
-                            )
+                                    onTap: () {
+                                      setState(() {
+                                        isPasswordObscured =
+                                            !isPasswordObscured;
+                                      });
+                                    },
+                                    child: Icon(
+                                      isPasswordObscured
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.black,
+                                    ),
+                                  )
                                 : const SizedBox.shrink(),
                             prefixIcon: const Icon(
                               Icons.key,
@@ -226,7 +227,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                   ),
-
                   TextButton(
                     onPressed: () => {},
                     child: const Text(
@@ -248,7 +248,7 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
-              onTap: () => signUpHandler(),
+              onTap: () => signInHandler(),
               child: Container(
                 height: 50,
                 width: double.infinity,
@@ -258,7 +258,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    'Sign in',
+                    'Sign In',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.sp,
@@ -283,11 +283,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    'Sign up',
+                    'Register',
                     style: TextStyle(
-                        color: AppColors.primaryText,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.normal),
+                      color: AppColors.primaryText,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ),
               ),

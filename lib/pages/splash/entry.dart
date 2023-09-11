@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:edu_guru/common/routes/app_routes.dart';
 import 'package:edu_guru/pages/splash/splash.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,9 @@ class _EntryScreenState extends State<EntryScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        ),
+      () => Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoute.splashScreen,
+        (route) => false,
       ),
     );
   }
