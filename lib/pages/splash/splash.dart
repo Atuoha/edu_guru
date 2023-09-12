@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../common/helpers/shared_prefs.dart';
 import '../../common/routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -46,7 +47,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
 // launch app
   void launch() {
-    Navigator.of(context).pushNamedAndRemoveUntil(AppRoute.signInScreen, (route) => false);
+    setAppPreviouslyRun();
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoute.signInScreen,
+      (route) => false,
+    );
   }
 
 // skip slides
@@ -119,7 +124,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryColor),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor),
               onPressed: () =>
                   currentPage != pages.length - 1 ? next() : launch(),
               child: Text(

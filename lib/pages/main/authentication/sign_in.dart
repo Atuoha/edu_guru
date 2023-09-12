@@ -2,12 +2,14 @@ import 'package:edu_guru/business_logic/sign_in/sign_in_bloc.dart';
 import 'package:edu_guru/constants/color.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:edu_guru/pages/main/widgets/flutter_toast.dart';
-import 'package:edu_guru/repositories/authentication_repo.dart';
+import 'package:edu_guru/repositories/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../common/routes/app_routes.dart';
 import '../../../constants/enums/status.dart';
+import '../widgets/loading.dart';
 import '../widgets/third_party_logins.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -29,11 +31,10 @@ class _SignInScreenState extends State<SignInScreen> {
     _formKey.currentState!.save();
     if (!valid) {
       toastInfo(msg: 'Ops! Incomplete credentials!', status: Status.error);
+
       return;
     }
-
-    AuthenticationRepo(context: context).handleSignIn(SignInType.email);
-    // Todo: Implement sign in
+    SignInRepo(context: context).handleSignIn(SignInType.email);
   }
 
   navigateToSIgnUp() {

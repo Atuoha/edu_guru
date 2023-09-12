@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../repositories/authentication_repo.dart';
+import '../../repositories/sign_in.dart';
 
 part 'sign_in_event.dart';
 

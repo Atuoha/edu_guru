@@ -13,7 +13,7 @@ import 'package:edu_guru/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget( EduGuru());
+    await tester.pumpWidget( const EduGuru());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

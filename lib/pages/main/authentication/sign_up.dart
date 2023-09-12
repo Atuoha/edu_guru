@@ -1,10 +1,9 @@
-import 'package:edu_guru/business_logic/sign_in/sign_in_bloc.dart';
 import 'package:edu_guru/constants/color.dart';
-import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:edu_guru/pages/main/widgets/flutter_toast.dart';
-import 'package:edu_guru/repositories/authentication_repo.dart';
+import 'package:edu_guru/repositories/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../business_logic/signup/signup_bloc.dart';
 import '../../../common/routes/app_routes.dart';
@@ -28,15 +27,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isConfirmPasswordObscured = true;
 
   void signUpHandler() {
+    EasyLoading.show();
     FocusScope.of(context).unfocus();
     var valid = _formKey.currentState!.validate();
     _formKey.currentState!.save();
     if (!valid) {
       toastInfo(msg: 'Ops! Incomplete credentials!', status: Status.error);
+      EasyLoading.dismiss();
       return;
     }
 
-    AuthenticationRepo(context: context).handleSignUp();
+    SignUpRepo(context: context).handleSignUp();
+    EasyLoading.dismiss();
   }
 
   navigateToSIgnIn() {
@@ -102,10 +104,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             context.read<SignUpBloc>().add(
-                              SignUpUsernameEvent(
-                                usernameController.text.trim(),
-                              ),
-                            );
+                                  SignUpUsernameEvent(
+                                    usernameController.text.trim(),
+                                  ),
+                                );
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -292,7 +294,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height:20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: confirmPasswordController,
                           obscureText: isConfirmPasswordObscured,
@@ -303,28 +305,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
 
                             if (passwordController.text != value) {
-                              toastInfo(msg: 'Password mismatch!', status: Status.error);
+                              toastInfo(
+                                  msg: 'Password mismatch!',
+                                  status: Status.error);
                               return 'Password mismatch!';
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            suffixIcon: confirmPasswordController.text.isNotEmpty
-                                ? GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isConfirmPasswordObscured =
-                                  !isConfirmPasswordObscured;
-                                });
-                              },
-                              child: Icon(
-                                isConfirmPasswordObscured
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
-                              ),
-                            )
-                                : const SizedBox.shrink(),
+                            suffixIcon:
+                                confirmPasswordController.text.isNotEmpty
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            isConfirmPasswordObscured =
+                                                !isConfirmPasswordObscured;
+                                          });
+                                        },
+                                        child: Icon(
+                                          isConfirmPasswordObscured
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                          color: Colors.black,
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
                             prefixIcon: const Icon(
                               Icons.key,
                               color: Colors.black,
@@ -377,7 +382,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-
                       TextButton(
                         onPressed: () => navigateToSIgnIn(),
                         child: const Text(
@@ -421,7 +425,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
           ],
         ),
