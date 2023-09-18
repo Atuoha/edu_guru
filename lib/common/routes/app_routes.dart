@@ -1,7 +1,8 @@
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/main/authentication/sign_up.dart';
-import 'package:edu_guru/pages/main/screens/home.dart';
-import 'package:edu_guru/pages/main/screens/main_entry.dart';
+import 'package:edu_guru/pages/main/application/home.dart';
+import 'package:edu_guru/pages/main/application/main_entry.dart';
+import 'package:edu_guru/pages/splash/entry.dart';
 import 'package:edu_guru/pages/splash/splash.dart';
 import 'package:flutter/cupertino.dart';
 

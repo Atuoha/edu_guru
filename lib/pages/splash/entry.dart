@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:edu_guru/common/routes/app_routes.dart';
-import 'package:edu_guru/pages/splash/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../gen/assets.gen.dart';
 
 class EntryScreen extends StatefulWidget {
   const EntryScreen({
@@ -18,7 +18,9 @@ class EntryScreen extends StatefulWidget {
 }
 
 class _EntryScreenState extends State<EntryScreen> {
-  isFirstRun() {
+
+
+ void  isFirstRun() {
     if (widget.isAppPreviouslyRun) {
       // app has ran before
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -59,7 +61,7 @@ class _EntryScreenState extends State<EntryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset('assets/images/edu_guru_transparent.png'),
+        child: Image.asset(Assets.images.eduGuruTransparent.path),
       ),
     );
   }

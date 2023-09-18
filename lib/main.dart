@@ -1,4 +1,5 @@
 import 'package:edu_guru/common/app_bloc_providers/app_bloc_providers.dart';
+import 'package:edu_guru/common/pages/pages.dart';
 import 'package:edu_guru/common/routes/app_routes.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/splash/entry.dart';
@@ -62,12 +63,14 @@ class EduGuru extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           home: child,
-          routes: routes,
+          // routes: routes,
           builder: EasyLoading.init(),
+          onGenerateRoute: AppPages.generateRoute,
         ),
         child: EntryScreen(
           isAppPreviouslyRun: isAppPreviouslyRun,
         ),
+
       ),
     );
   }

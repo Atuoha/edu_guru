@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:edu_guru/pages/main/screens/chat/chat.dart';
-import 'package:edu_guru/pages/main/screens/courses/courses.dart';
-import 'package:edu_guru/pages/main/screens/home.dart';
-import 'package:edu_guru/pages/main/screens/profile/profile.dart';
-import 'package:edu_guru/pages/main/screens/search/search.dart';
+import 'chat/chat.dart';
+import 'courses/courses.dart';
+import 'home.dart';
+import 'profile/profile.dart';
+import 'search/search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/color.dart';
@@ -25,8 +28,7 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
     ProfileScreen(),
   ];
 
-
-  void setNewPage(int page){
+  void setNewPage(int page) {
     setState(() {
       _pageIndex = page;
     });
@@ -41,11 +43,19 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
         style: TabStyle.reactCircle,
         initialActiveIndex: _pageIndex,
         items: [
-          buildTabItem(Icons.home, 0),
-          buildTabItem(Icons.search, 1),
-          buildTabItem(Icons.play_arrow, 2),
-          buildTabItem(Icons.chat, 3),
-          buildTabItem(Icons.person, 4),
+          if (Platform.isIOS) ...[
+            buildTabItem(CupertinoIcons.home, 0),
+            buildTabItem(CupertinoIcons.search, 1),
+            buildTabItem(CupertinoIcons.play_arrow, 2),
+            buildTabItem(CupertinoIcons.chat_bubble_text, 3),
+            buildTabItem(CupertinoIcons.person, 4),
+          ] else ...[
+            buildTabItem(Icons.home, 0),
+            buildTabItem(Icons.search, 1),
+            buildTabItem(Icons.play_arrow, 2),
+            buildTabItem(Icons.chat, 3),
+            buildTabItem(Icons.person, 4),
+          ]
         ],
         onTap: setNewPage,
       ),

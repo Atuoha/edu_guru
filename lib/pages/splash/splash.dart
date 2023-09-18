@@ -6,6 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../common/helpers/shared_prefs.dart';
 import '../../common/routes/app_routes.dart';
+import '../../gen/assets.gen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,17 +21,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   List<Widget> pages = [
     _page(
-      imgUrl: 'assets/images/sp1.png',
+      imgUrl: Assets.images.sp1.path,
       title: 'Page One',
       description: 'Lorem ipsum dolor sit amet consecrate adipisicing elite.',
     ),
     _page(
-      imgUrl: 'assets/images/sp2.png',
+      imgUrl: Assets.images.sp2.path,
       title: 'Page Two',
       description: 'Lorem ipsum dolor sit amet consecrate adipisicing elite. ',
     ),
     _page(
-      imgUrl: 'assets/images/sp3.png',
+      imgUrl: Assets.images.sp3.path,
       title: 'Page Three',
       description: 'Lorem ipsum dolor sit amet consecrate adipisicing elite. ',
     ),
