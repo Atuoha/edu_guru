@@ -1,42 +1,54 @@
+import 'dart:async';
+
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/pages/main/application/main_entry.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/main/authentication/sign_up.dart';
+import 'package:edu_guru/pages/main/error_screen.dart';
+import 'package:edu_guru/pages/splash/entry.dart';
 import 'package:edu_guru/pages/splash/splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../constants/constants.dart';
+import '../../global_config/global.dart';
 import '../routes/app_routes.dart';
 
 class AppPages {
   static List<PageEntity> routes() => [
         PageEntity(
-          route: AppRoute.splashScreen,
+          route: AppRoutes.entryScreen,
+          page: const EntryScreen(),
+        ),
+        PageEntity(
+          route: AppRoutes.splashScreen,
           page: const SplashScreen(),
           bloc: BlocProvider(
             create: (_) => SplashBloc(),
           ),
         ),
         PageEntity(
-          route: AppRoute.splashScreen,
+          route: AppRoutes.errorScreen,
+          page: const ErrorScreen(),
+        ),
+        PageEntity(
+          route: AppRoutes.signInScreen,
           page: const SignInScreen(),
           bloc: BlocProvider(
             create: (_) => SignInBloc(),
           ),
         ),
         PageEntity(
-          route: AppRoute.splashScreen,
+          route: AppRoutes.splashScreen,
           page: const SignUpScreen(),
           bloc: BlocProvider(
             create: (_) => SignUpBloc(),
           ),
         ),
         PageEntity(
-          route: AppRoute.homeScreen,
+          route: AppRoutes.homeScreen,
           page: const MainEntryScreen(),
-          // bloc: BlocProvider(
-          //   create: (_) => SignUpBloc(),
-          // ),
         ),
       ];
 
@@ -53,18 +65,45 @@ class AppPages {
     if (routeSettings.name != null) {
       // check if routeSettings is available in routes
       var result =
-          routes().where((element) => routeSettings.name == element.route);
+          routes().where((element) => element.route == routeSettings.name);
 
       if (result.isNotEmpty) {
-        return MaterialPageRoute(
-          builder: (_) => result.first.page,
-          settings: routeSettings,
-        );
+        print('First Log');
+        print(result.first.route);
+        bool isAppPreviouslyRan =
+            Global.storageService.getBoolValue(AppConstants.isAppPreviouslyRan);
+
+        bool isUserLoggedIn =
+            Global.storageService.getBoolValue(AppConstants.isUserLoggedIn);
+
+        if (isAppPreviouslyRan) {
+          print('Second Log');
+          print(isAppPreviouslyRan);
+
+          if (isUserLoggedIn) {
+            print('User is logged in');
+            return MaterialPageRoute(
+              builder: (_) => const MainEntryScreen(),
+              settings: routeSettings,
+            );
+          } else {
+            return MaterialPageRoute(
+              builder: (_) => const SignInScreen(),
+              settings: routeSettings,
+            );
+          }
+        }
       }
+
+      return MaterialPageRoute(
+        builder: (_) => result.first.page,
+        settings: routeSettings,
+      );
     }
 
+    print('Unknown route name');
     return MaterialPageRoute(
-      builder: (_) => const SignInScreen(),
+      builder: (_) => const ErrorScreen(),
       settings: routeSettings,
     );
   }

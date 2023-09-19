@@ -577,6 +577,12 @@ class $AssetsImagesGen {
   AssetGenImage get accountHeader =>
       const AssetGenImage('assets/images/account_header.png');
 
+
+  /// File path: assets/images/account_header.png
+  AssetGenImage get errorImg =>
+      const AssetGenImage('assets/images/error_img.png');
+
+
   /// File path: assets/images/actionbar_search.png
   AssetGenImage get actionbarSearch =>
       const AssetGenImage('assets/images/actionbar_search.png');

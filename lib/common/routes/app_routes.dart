@@ -6,16 +6,19 @@ import 'package:edu_guru/pages/splash/entry.dart';
 import 'package:edu_guru/pages/splash/splash.dart';
 import 'package:flutter/cupertino.dart';
 
-class AppRoute {
+class AppRoutes {
+  static const String entryScreen = '/';
   static const String splashScreen = '/splashScreen';
   static const String signInScreen = '/signInScreen';
   static const String signUpScreen = '/signUpScreen';
   static const String homeScreen = '/homeScreen';
+  static const String errorScreen = '/errorScreen';
 }
 
 final routes = {
-  AppRoute.splashScreen: (context) => const SplashScreen(),
-  AppRoute.signInScreen: (context) => const SignInScreen(),
-  AppRoute.signUpScreen: (context) => const SignUpScreen(),
-  AppRoute.homeScreen: (context) => const MainEntryScreen(),
+  AppRoutes.entryScreen: (context)=>const EntryScreen(),
+  AppRoutes.splashScreen: (context) => const SplashScreen(),
+  AppRoutes.signInScreen: (context) => const SignInScreen(),
+  AppRoutes.signUpScreen: (context) => const SignUpScreen(),
+  AppRoutes.homeScreen: (context) => const MainEntryScreen(),
 };

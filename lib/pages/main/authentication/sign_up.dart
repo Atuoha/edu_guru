@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   navigateToSIgnIn() {
-    Navigator.of(context).pushNamed(AppRoute.signInScreen);
+    Navigator.of(context).pushNamed(AppRoutes.signInScreen);
   }
 
   @override

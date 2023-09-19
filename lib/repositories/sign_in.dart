@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_guru/business_logic/export.dart';
+import 'package:edu_guru/constants/constants.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../business_logic/sign_in/sign_in_bloc.dart';
 import '../common/routes/app_routes.dart';
 import '../constants/enums/status.dart';
+import '../global_config/global.dart';
 import '../pages/main/widgets/flutter_toast.dart';
 
 class SignInRepo {
@@ -37,6 +39,8 @@ class SignInRepo {
             toastInfo(msg: 'Ops! Email not verified!', status: Status.error);
             return;
           }
+          //setting user token
+          Global.storageService.setStringValue(AppConstants.userTokenKey, credential.user!.uid);
           navigateToMain();
         } on FirebaseAuthException catch (e) {
           String error = "Error occurred!";
@@ -82,6 +86,7 @@ class SignInRepo {
 
   void navigateToMain() {
     EasyLoading.dismiss();
-    Navigator.of(context).pushNamed(AppRoute.homeScreen);
+    Global.storageService.setBoolValue(AppConstants.isUserLoggedIn, true);
+    Navigator.of(context).pushNamed(AppRoutes.homeScreen);
   }
 }

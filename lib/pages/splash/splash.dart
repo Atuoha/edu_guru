@@ -1,11 +1,10 @@
 import 'package:edu_guru/constants/color.dart';
-import 'package:edu_guru/pages/main/authentication/sign_in.dart';
+import 'package:edu_guru/global_config/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../common/helpers/shared_prefs.dart';
 import '../../common/routes/app_routes.dart';
+import '../../constants/constants.dart';
 import '../../gen/assets.gen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -48,9 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
 // launch app
   void launch() {
-    setAppPreviouslyRun();
+    Global.storageService.setBoolValue(AppConstants.isAppPreviouslyRan, true);
     Navigator.of(context).pushNamedAndRemoveUntil(
-      AppRoute.signInScreen,
+      AppRoutes.signInScreen,
       (route) => false,
     );
   }
