@@ -127,6 +127,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/call.png
   AssetGenImage get call => const AssetGenImage('assets/icons/call.png');
 
+  /// File path: assets/icons/camera-icon.png
+  AssetGenImage get cameraIcon =>
+      const AssetGenImage('assets/icons/camera-icon.png');
+
   /// File path: assets/icons/close.png
   AssetGenImage get close => const AssetGenImage('assets/icons/close.png');
 
@@ -147,22 +151,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/down.png
   AssetGenImage get down => const AssetGenImage('assets/icons/down.png');
 
+  /// File path: assets/icons/download-icon.png
+  AssetGenImage get downloadIcon =>
+      const AssetGenImage('assets/icons/download-icon.png');
+
   /// File path: assets/icons/download.png
   AssetGenImage get download =>
       const AssetGenImage('assets/icons/download.png');
 
-  /// File path: assets/icons/download_detail.png
-  AssetGenImage get downloadDetail =>
-      const AssetGenImage('assets/icons/download_detail.png');
-
   /// File path: assets/icons/edit 2.png
   AssetGenImage get edit2 => const AssetGenImage('assets/icons/edit 2.png');
 
+  /// File path: assets/icons/edit-icon.png
+  AssetGenImage get editIcon =>
+      const AssetGenImage('assets/icons/edit-icon.png');
+
   /// File path: assets/icons/edit.png
   AssetGenImage get edit => const AssetGenImage('assets/icons/edit.png');
-
-  /// File path: assets/icons/edit_3.png
-  AssetGenImage get edit3 => const AssetGenImage('assets/icons/edit_3.png');
 
   /// File path: assets/icons/element.png
   AssetGenImage get element => const AssetGenImage('assets/icons/element.png');
@@ -174,16 +179,16 @@ class $AssetsIconsGen {
   AssetGenImage get facebook =>
       const AssetGenImage('assets/icons/facebook.png');
 
+  /// File path: assets/icons/file-icon.png
+  AssetGenImage get fileIcon =>
+      const AssetGenImage('assets/icons/file-icon.png');
+
   /// File path: assets/icons/file-text.png
   AssetGenImage get fileText =>
       const AssetGenImage('assets/icons/file-text.png');
 
   /// File path: assets/icons/file.png
   AssetGenImage get file => const AssetGenImage('assets/icons/file.png');
-
-  /// File path: assets/icons/file_detail.png
-  AssetGenImage get fileDetail =>
-      const AssetGenImage('assets/icons/file_detail.png');
 
   /// File path: assets/icons/filter.png
   AssetGenImage get filter => const AssetGenImage('assets/icons/filter.png');
@@ -289,6 +294,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/mic1.png
   AssetGenImage get mic1 => const AssetGenImage('assets/icons/mic1.png');
 
+  /// File path: assets/icons/microphone-icon.png
+  AssetGenImage get microphoneIcon =>
+      const AssetGenImage('assets/icons/microphone-icon.png');
+
   /// File path: assets/icons/more-vertical-2.png
   AssetGenImage get moreVertical2 =>
       const AssetGenImage('assets/icons/more-vertical-2.png');
@@ -300,8 +309,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/options.png
   AssetGenImage get options => const AssetGenImage('assets/icons/options.png');
 
-  /// File path: assets/icons/pause.png
-  AssetGenImage get pause => const AssetGenImage('assets/icons/pause.png');
+  /// File path: assets/icons/pause-icon.png
+  AssetGenImage get pauseIcon =>
+      const AssetGenImage('assets/icons/pause-icon.png');
 
   /// File path: assets/icons/people.png
   AssetGenImage get people => const AssetGenImage('assets/icons/people.png');
@@ -323,12 +333,8 @@ class $AssetsIconsGen {
   AssetGenImage get phoneCall1 =>
       const AssetGenImage('assets/icons/phone-call1.png');
 
-  /// File path: assets/icons/phone_login.png
-  AssetGenImage get phoneLogin =>
-      const AssetGenImage('assets/icons/phone_login.png');
-
-  /// File path: assets/icons/photo.png
-  AssetGenImage get photo => const AssetGenImage('assets/icons/photo.png');
+  /// File path: assets/icons/phone.png
+  AssetGenImage get phone => const AssetGenImage('assets/icons/phone.png');
 
   /// File path: assets/icons/play button.png
   AssetGenImage get playButton =>
@@ -338,13 +344,13 @@ class $AssetsIconsGen {
   AssetGenImage get playButton2 =>
       const AssetGenImage('assets/icons/play button2.png');
 
-  /// File path: assets/icons/play-circle.png
-  AssetGenImage get playCircle =>
-      const AssetGenImage('assets/icons/play-circle.png');
-
   /// File path: assets/icons/play-circle1.png
   AssetGenImage get playCircle1 =>
       const AssetGenImage('assets/icons/play-circle1.png');
+
+  /// File path: assets/icons/play-icon.png
+  AssetGenImage get playIcon =>
+      const AssetGenImage('assets/icons/play-icon.png');
 
   /// File path: assets/icons/plus.png
   AssetGenImage get plus => const AssetGenImage('assets/icons/plus.png');
@@ -365,14 +371,6 @@ class $AssetsIconsGen {
   AssetGenImage get rewindLeft =>
       const AssetGenImage('assets/icons/rewind-left.png');
 
-  /// File path: assets/icons/rewind-left2.png
-  AssetGenImage get rewindLeft2 =>
-      const AssetGenImage('assets/icons/rewind-left2.png');
-
-  /// File path: assets/icons/rewind-left3.png
-  AssetGenImage get rewindLeft3 =>
-      const AssetGenImage('assets/icons/rewind-left3.png');
-
   /// File path: assets/icons/rewind-right.png
   AssetGenImage get rewindRight =>
       const AssetGenImage('assets/icons/rewind-right.png');
@@ -383,11 +381,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search2.png
   AssetGenImage get search2 => const AssetGenImage('assets/icons/search2.png');
 
+  /// File path: assets/icons/send-icon.png
+  AssetGenImage get sendIcon =>
+      const AssetGenImage('assets/icons/send-icon.png');
+
   /// File path: assets/icons/send.png
   AssetGenImage get send => const AssetGenImage('assets/icons/send.png');
-
-  /// File path: assets/icons/send2.png
-  AssetGenImage get send2 => const AssetGenImage('assets/icons/send2.png');
 
   /// File path: assets/icons/settings.png
   AssetGenImage get settings =>
@@ -412,6 +411,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/user.png
   AssetGenImage get user => const AssetGenImage('assets/icons/user.png');
 
+  /// File path: assets/icons/video-call.png
+  AssetGenImage get videoCall =>
+      const AssetGenImage('assets/icons/video-call.png');
+
   /// File path: assets/icons/video.png
   AssetGenImage get video => const AssetGenImage('assets/icons/video.png');
 
@@ -426,13 +429,6 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/video3.png
   AssetGenImage get video3 => const AssetGenImage('assets/icons/video3.png');
-
-  /// File path: assets/icons/video_detail.png
-  AssetGenImage get videoDetail =>
-      const AssetGenImage('assets/icons/video_detail.png');
-
-  /// File path: assets/icons/voice.png
-  AssetGenImage get voice => const AssetGenImage('assets/icons/voice.png');
 
   /// File path: assets/icons/vv.mp4
   String get vv => 'assets/icons/vv.mp4';
@@ -474,23 +470,24 @@ class $AssetsIconsGen {
         by,
         c05,
         call,
+        cameraIcon,
         close,
         cloudDownload,
         contact,
         creditCard,
         cube,
         down,
+        downloadIcon,
         download,
-        downloadDetail,
         edit2,
+        editIcon,
         edit,
-        edit3,
         element,
         expand,
         facebook,
+        fileIcon,
         fileText,
         file,
-        fileDetail,
         filter,
         google,
         headpic,
@@ -524,34 +521,32 @@ class $AssetsIconsGen {
         message,
         mic,
         mic1,
+        microphoneIcon,
         moreVertical2,
         moreVertical,
         options,
-        pause,
+        pauseIcon,
         people,
         person,
         person1,
         person2,
         phoneCall,
         phoneCall1,
-        phoneLogin,
-        photo,
+        phone,
         playButton,
         playButton2,
-        playCircle,
         playCircle1,
+        playIcon,
         plus,
         profileBook,
         profileStar,
         profileVideo,
         rewindLeft,
-        rewindLeft2,
-        rewindLeft3,
         rewindRight,
         search,
         search2,
+        sendIcon,
         send,
-        send2,
         settings,
         shoppingCart,
         star,
@@ -559,13 +554,12 @@ class $AssetsIconsGen {
         star2,
         star3,
         user,
+        videoCall,
         video,
         video1,
         video2,
         video22,
         video3,
-        videoDetail,
-        voice,
         vv
       ];
 }
@@ -576,12 +570,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/account_header.png
   AssetGenImage get accountHeader =>
       const AssetGenImage('assets/images/account_header.png');
-
-
-  /// File path: assets/images/account_header.png
-  AssetGenImage get errorImg =>
-      const AssetGenImage('assets/images/error_img.png');
-
 
   /// File path: assets/images/actionbar_search.png
   AssetGenImage get actionbarSearch =>
@@ -605,6 +593,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/eduguru_icon.jpeg
   AssetGenImage get eduguruIcon =>
       const AssetGenImage('assets/images/eduguru_icon.jpeg');
+
+  /// File path: assets/images/error_img.png
+  AssetGenImage get errorImg =>
+      const AssetGenImage('assets/images/error_img.png');
 
   /// File path: assets/images/ic_launcher.png
   AssetGenImage get icLauncher =>
@@ -644,6 +636,9 @@ class $AssetsImagesGen {
   AssetGenImage get videoShareIcon =>
       const AssetGenImage('assets/images/video_share_icon.png');
 
+  /// File path: assets/images/zImg.jpeg
+  AssetGenImage get zImg => const AssetGenImage('assets/images/zImg.jpeg');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         accountHeader,
@@ -653,6 +648,7 @@ class $AssetsImagesGen {
         eduGuru,
         eduGuruTransparent,
         eduguruIcon,
+        errorImg,
         icLauncher,
         icPlaying,
         love,
@@ -663,7 +659,8 @@ class $AssetsImagesGen {
         sp3,
         videoIconPraise,
         videoMsgIcon,
-        videoShareIcon
+        videoShareIcon,
+        zImg
       ];
 }
 

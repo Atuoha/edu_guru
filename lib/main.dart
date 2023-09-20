@@ -1,15 +1,11 @@
 import 'package:edu_guru/common/app_bloc_providers/app_bloc_providers.dart';
 import 'package:edu_guru/common/pages/pages.dart';
-import 'package:edu_guru/pages/splash/entry.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:edu_guru/common/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'common/routes/app_routes.dart';
-import 'firebase_options.dart';
-import 'gen/fonts.gen.dart';
 import 'global_config/global.dart';
 
 Future<void> main() async {
@@ -39,13 +35,7 @@ class EduGuru extends StatelessWidget {
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-              color: Colors.transparent,
-              elevation: 0,
-            ),
-            fontFamily: FontFamily.avenir,
-          ),
+          theme: getLightTheme(),
           builder: EasyLoading.init(),
           onGenerateRoute: AppPages.generateRoute,
         ),

@@ -1,13 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:edu_guru/common/theme/styles_manager.dart';
+import 'package:edu_guru/pages/main/components/search_section.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../common/models/carousel_sliders.dart';
+import '../../../common/theme/font_manager.dart';
 import '../../../constants/color.dart';
 import '../../../gen/assets.gen.dart';
 import '../components/drawer.dart';
+import '../widgets/carousel_slider.dart';
 import '../widgets/drawer_opener.dart';
+import '../widgets/kdot_indicator.dart';
+import '../widgets/see_all_courses.dart';
+import '../widgets/single_course_tag.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,9 +32,35 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int currentCarouselIndex = 0;
+  TextEditingController searchController = TextEditingController();
+
+  final List<String> courseTags = ['All', 'Popular', 'Newest'];
+  int currentCourseTagIndex = 0;
+
+  void setCourseTag(int courseTagIndex) {
+    setState(() {
+      currentCourseTagIndex = courseTagIndex;
+    });
+  }
+
+  void setCurrentCarouselIndex(int carouselIndex) {
+    setState(() {
+      currentCarouselIndex = carouselIndex;
+    });
+  }
+
+  void setFilter() {
+    // Todo set filter
+  }
+
+  void seeAllCourses() {
+    // Todo see all courses
+  }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -58,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'Hello,',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 23,
                       color: AppColors.primaryThreeElementText,
                       fontWeight: FontWeight.bold,
                     ),
@@ -75,46 +108,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            CarouselSlider.builder(
-              itemCount: carouselSliders.length,
-              itemBuilder: (context, index, i) =>
-                  singleCarouselItem(index: index),
-              options: CarouselOptions(
-                onPageChanged: (int index, CarouselPageChangedReason a) =>
-                    setState(() {
-                  currentCarouselIndex = index;
-                }),
-                viewportFraction: 0.8,
-                height: 200,
-                autoPlay: true,
-                enlargeCenterPage: true,
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: SearchSection(
+                size: size,
+                searchController: searchController,
+                setFilter: setFilter,
               ),
             ),
             const SizedBox(height: 10),
-            Center(
-              child: DotsIndicator(
-                position: currentCarouselIndex,
-                dotsCount: carouselSliders.length,
-                decorator: const DotsDecorator(
-                  color: AppColors.primaryFourElementText,
-                  activeColor: AppColors.primaryColor,
-                ),
+            KCarouselSlider(
+              carouselSliders: carouselSliders,
+              setCurrentCarouselIndex: setCurrentCarouselIndex,
+            ),
+            const SizedBox(height: 10),
+            KDotsIndicator(
+              currentCarouselIndex: currentCarouselIndex,
+              carouselSliders: carouselSliders,
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SeeAllCourses(seeAllCourses: seeAllCourses),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: size.height / 23,
+                    child: ListView.builder(
+                      itemCount: courseTags.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => setCourseTag(index),
+                        child: SingleCourseTag(
+                          courseTag: courseTags[index],
+                          currentCourseTag: currentCourseTagIndex,
+                          courseTagIndex: index,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  // single carousel item
-  Container singleCarouselItem({required int index}) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            carouselSliders[index].imgUrl.path,
-          ),
         ),
       ),
     );

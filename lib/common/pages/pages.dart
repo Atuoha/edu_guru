@@ -68,8 +68,6 @@ class AppPages {
           routes().where((element) => element.route == routeSettings.name);
 
       if (result.isNotEmpty) {
-        print('First Log');
-        print(result.first.route);
         bool isAppPreviouslyRan =
             Global.storageService.getBoolValue(AppConstants.isAppPreviouslyRan);
 
@@ -77,11 +75,8 @@ class AppPages {
             Global.storageService.getBoolValue(AppConstants.isUserLoggedIn);
 
         if (isAppPreviouslyRan) {
-          print('Second Log');
-          print(isAppPreviouslyRan);
 
           if (isUserLoggedIn) {
-            print('User is logged in');
             return MaterialPageRoute(
               builder: (_) => const MainEntryScreen(),
               settings: routeSettings,

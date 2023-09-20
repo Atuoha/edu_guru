@@ -41,41 +41,14 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               TextField(
                 controller: searchController,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(
                     CupertinoIcons.search,
                     color: Colors.black,
                   ),
                   hintText: 'Enter search keyword',
-                  label: const Text(
+                  label: Text(
                     'Search Here',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryFourElementText,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryFourElementText,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryElementBg,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(
-                      color: AppColors.primaryElementBg,
-                    ),
                   ),
                 ),
               )

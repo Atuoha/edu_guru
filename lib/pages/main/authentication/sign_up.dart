@@ -127,33 +127,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintText: 'John Doe',
                             label: const Text(
                               'Username',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
                             ),
                           ),
                         ),
@@ -180,41 +153,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
                             return null;
                           },
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
                               Icons.email,
                               color: Colors.black,
                             ),
                             hintText: 'johndoe@gmail.com',
-                            label: const Text(
+                            label: Text(
                               'Email',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
                             ),
                           ),
                         ),
@@ -264,33 +210,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintText: '*******',
                             label: const Text(
                               'Password',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
                             ),
                           ),
                         ),
@@ -337,34 +256,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintText: '*******',
                             label: const Text(
                               'Password',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryFourElementText,
-                              ),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryElementBg,
-                              ),
-                            ),
+
+
                           ),
                         ),
                       ],
