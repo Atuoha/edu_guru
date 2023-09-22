@@ -1,4 +1,6 @@
 import 'package:edu_guru/business_logic/carousel_slider/carousel_slider_cubit.dart';
+import 'package:edu_guru/business_logic/category/category_cubit.dart';
+import 'package:edu_guru/pages/main/components/course_category_section.dart';
 import 'package:edu_guru/pages/main/components/search_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +13,7 @@ import '../widgets/carousel_slider.dart';
 import '../widgets/drawer_opener.dart';
 import '../widgets/kdot_indicator.dart';
 import '../widgets/see_all_courses.dart';
-import '../widgets/single_course_tag.dart';
+import '../widgets/single_course_categories.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,15 +24,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
-
-  final List<String> courseTags = ['All', 'Popular', 'Newest'];
-  int currentCourseTagIndex = 0;
-
-  void setCourseTag(int courseTagIndex) {
-    setState(() {
-      currentCourseTagIndex = courseTagIndex;
-    });
-  }
 
   void setFilter() {
     // Todo set filter
@@ -132,21 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     SeeAllCourses(seeAllCourses: seeAllCourses),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      height: size.height / 23,
-                      child: ListView.builder(
-                        itemCount: courseTags.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => GestureDetector(
-                          onTap: () => setCourseTag(index),
-                          child: SingleCourseTag(
-                            courseTag: courseTags[index],
-                            currentCourseTag: currentCourseTagIndex,
-                            courseTagIndex: index,
-                          ),
-                        ),
-                      ),
-                    )
+                    CourseCategorySection(size: size),
                   ],
                 ),
               )

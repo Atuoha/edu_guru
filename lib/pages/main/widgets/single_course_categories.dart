@@ -1,18 +1,19 @@
+import 'package:edu_guru/common/models/course_category.dart';
 import 'package:flutter/material.dart';
 import '../../../common/theme/styles_manager.dart';
 import '../../../constants/color.dart';
 
-class SingleCourseTag extends StatelessWidget {
-  const SingleCourseTag({
+class SingleCourseCategory extends StatelessWidget {
+  const SingleCourseCategory({
     super.key,
-    required this.courseTag,
-    required this.currentCourseTag,
-    required this.courseTagIndex,
+    required this.courseCategory,
+    required this.currentCourseCategory,
+    required this.courseCategoryIndex,
   });
 
-  final String courseTag;
-  final int currentCourseTag;
-  final int courseTagIndex;
+  final CourseCategory courseCategory;
+  final int currentCourseCategory;
+  final int courseCategoryIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +25,16 @@ class SingleCourseTag extends StatelessWidget {
           vertical: 5,
         ),
         decoration: BoxDecoration(
-          color: currentCourseTag == courseTagIndex
+          color: currentCourseCategory == courseCategoryIndex
               ? AppColors.secondaryColor
               : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
           child: Text(
-            courseTag,
+            courseCategory.title,
             style: getBoldStyle(
-              color: currentCourseTag == courseTagIndex
+              color: currentCourseCategory == courseCategoryIndex
                   ? Colors.white
                   : AppColors.primaryThreeElementText,
             ),
