@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common/models/carousel_sliders.dart';
 import '../../../constants/color.dart';
@@ -24,8 +25,8 @@ class KDotsIndicator extends StatelessWidget {
         decorator: DotsDecorator(
           color: AppColors.primaryFourElementText,
           activeColor: AppColors.primaryColor,
-          size: const Size.square(4.0),
-          activeSize: const Size(18.0, 5.0),
+          size:  Size.square(4.0.h),
+          activeSize:  Size(18.0.h, 5.0.h),
           activeShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(3.0),
           ),

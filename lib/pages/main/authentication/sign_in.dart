@@ -37,7 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
     SignInRepo(context: context).handleSignIn(SignInType.email);
   }
 
-  navigateToSIgnUp() {
+  navigateToSignUp() {
     Navigator.of(context).pushNamed(AppRoutes.signUpScreen);
   }
 
@@ -54,6 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Sign In',
           style: TextStyle(
@@ -217,7 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () => navigateToSIgnUp(),
+              onTap: () => navigateToSignUp(),
               child: Container(
                 height: 50,
                 width: double.infinity,

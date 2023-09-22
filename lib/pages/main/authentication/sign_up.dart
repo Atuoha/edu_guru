@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     EasyLoading.dismiss();
   }
 
-  navigateToSIgnIn() {
+  navigateToSignIn() {
     Navigator.of(context).pushNamed(AppRoutes.signInScreen);
   }
 
@@ -62,6 +62,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) => GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: const Icon(Icons.chevron_left),
+          ),
+        ),
+        automaticallyImplyLeading: false,
         title: Text(
           'Register Account',
           style: TextStyle(
@@ -257,8 +264,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             label: const Text(
                               'Password',
                             ),
-
-
                           ),
                         ),
                       ],
@@ -277,7 +282,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => navigateToSIgnIn(),
+                        onPressed: () => navigateToSignIn(),
                         child: const Text(
                           'Already a user? Sign in',
                           style: TextStyle(

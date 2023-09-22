@@ -40,7 +40,7 @@ class AppPages {
           ),
         ),
         PageEntity(
-          route: AppRoutes.splashScreen,
+          route: AppRoutes.signUpScreen,
           page: const SignUpScreen(),
           bloc: BlocProvider(
             create: (_) => SignUpBloc(),
