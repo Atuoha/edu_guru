@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../constants/color.dart';
 import '../../../../gen/assets.gen.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -15,6 +13,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -26,7 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.only(right: 18),
                 child: Icon(
                   Icons.more_vert,
-                  color: AppColors.secondaryColor,
+                  color: Colors.white,
+                  size: 25,
                 ),
               ),
             ],
@@ -40,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     horizontal: 18,
                     vertical: 10,
                   ),
+                  centerTitle: false,
                   title: AnimatedOpacity(
                     opacity: constraints.biggest.height <= 120 ? 1 : 0,
                     duration: const Duration(
@@ -48,12 +49,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: AppColors.primaryColor,
-                          backgroundImage: AssetImage(
-                            Assets.icons.b02.path,
-                          ),
+                        Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 25,
+                              backgroundColor: AppColors.primaryColor,
+                              backgroundImage: AssetImage(
+                                Assets.icons.b02.path,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 3,
+                              right: 5,
+                              child: Container(
+                                height: 15.h,
+                                width: 15.h,
+                                decoration: BoxDecoration(
+                                  color:
+                                      AppColors.secondaryColor.withOpacity(0.8),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Image.asset(
+                                    Assets.icons.editIcon.path,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                         const SizedBox(width: 10),
                         const Text(
@@ -78,25 +103,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         end: Alignment.topRight,
                       ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 45,
-                          backgroundColor: Colors.white,
-                          backgroundImage: AssetImage(
-                            Assets.icons.b02.path,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.paddingOf(context).top,
+                        left: 15,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              CircleAvatar(
+                                radius: 45,
+                                backgroundColor: Colors.white,
+                                backgroundImage: AssetImage(
+                                  Assets.icons.b02.path,
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 3,
+                                right: 5,
+                                child: Container(
+                                  height: 30.h,
+                                  width: 30.h,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.secondaryColor
+                                        .withOpacity(0.8),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      Assets.icons.editIcon.path,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        ),
-                        const Text(
-                          'John Phils',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                          const Text(
+                            'John Phils',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -105,9 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           SliverToBoxAdapter(
             child: Column(
-              children: [
-               
-              ],
+              children: [],
             ),
           )
         ],

@@ -4,8 +4,6 @@ import 'package:edu_guru/pages/main/components/search_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../common/theme/font_manager.dart';
-import '../../../common/theme/styles_manager.dart';
 import '../../../constants/color.dart';
 import '../../../gen/assets.gen.dart';
 import '../components/drawer.dart';

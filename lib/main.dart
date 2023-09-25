@@ -36,7 +36,7 @@ class EduGuru extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: getLightTheme(),
+          theme: getTheme(),
           builder: EasyLoading.init(),
           onGenerateRoute: AppPages.generateRoute,
         ),

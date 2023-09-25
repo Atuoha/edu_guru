@@ -6,7 +6,7 @@ import 'values_manager.dart';
 import 'font_manager.dart';
 
 // Light Dark Theme
-ThemeData getLightTheme() {
+ThemeData getTheme() {
   return ThemeData(
     primaryColor: AppColors.primaryColor,
     primaryColorLight: Colors.black,
