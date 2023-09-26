@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../common/theme/font_manager.dart';
 import '../../../../constants/color.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../widgets/single_profile_menu_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,6 +14,20 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  void navigateToSettings() {}
+
+  void navigateToAchievements() {}
+
+  void navigateToPaymentDetails() {}
+
+  void navigateToWishList() {}
+
+  void navigateToLearningRemainders() {}
+
+  void navigateToBuyCourse() {}
+
+  void navigateToMyCourses() {}
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -65,8 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 height: 15.h,
                                 width: 15.h,
                                 decoration: BoxDecoration(
-                                  color:
-                                      AppColors.secondaryColor.withOpacity(0.8),
+                                  color: AppColors.secondaryOpacity,
                                   shape: BoxShape.circle,
                                 ),
                                 child: Padding(
@@ -159,8 +175,111 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SliverToBoxAdapter(
-            child: Column(
-              children: [],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                children: [
+                  Container(
+                    height: 60,
+                    width: size.width / 0.9,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () => navigateToMyCourses(),
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                Image.asset(
+                                  Assets.icons.videoCall.path,
+                                  color: AppColors.primaryFourElementText,
+                                  width: 25.w,
+                                ),
+                                const SizedBox(width: 5),
+                                const Text(
+                                  'My Courses',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: FontSize.s14,
+                                    color: AppColors.primaryFourElementText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => navigateToWishList(),
+                            child: const Text(
+                              'Wishlist',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontSize.s14,
+                                color: AppColors.primaryFourElementText,
+                              ),
+                            ),
+                          ),
+                          const Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.military_tech,
+                                color: AppColors.primaryFourElementText,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                'Achievements',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: FontSize.s14,
+                                  color: AppColors.primaryFourElementText,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 350,
+                    child: ListView(
+                      children: [
+                        SingleProfileMenuTile(
+                          icon: CupertinoIcons.settings,
+                          title: 'Settings',
+                          fnc: navigateToSettings,
+                        ),
+                        SingleProfileMenuTile(
+                          icon: Icons.wallet,
+                          title: 'Payment Details',
+                          fnc: navigateToPaymentDetails,
+                        ),
+                        SingleProfileMenuTile(
+                          icon: Icons.credit_card,
+                          title: 'Buy course',
+                          fnc: navigateToBuyCourse,
+                        ),
+                        SingleProfileMenuTile(
+                          icon: CupertinoIcons.heart_fill,
+                          title: 'Wishlist',
+                          fnc: navigateToWishList,
+                        ),
+                        SingleProfileMenuTile(
+                          icon: CupertinoIcons.alarm,
+                          title: 'Learning Remainder',
+                          fnc: navigateToWishList,
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
