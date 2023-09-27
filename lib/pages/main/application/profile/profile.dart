@@ -1,6 +1,8 @@
+import 'package:edu_guru/common/models/profile_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../common/routes/app_routes.dart';
 import '../../../../common/theme/font_manager.dart';
 import '../../../../constants/color.dart';
 import '../../../../gen/assets.gen.dart';
@@ -14,7 +16,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  void navigateToSettings() {}
+  void navigateToSettings() {
+    Navigator.of(context).pushNamed(AppRoutes.settingScreen);
+  }
 
   void navigateToAchievements() {}
 
@@ -22,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void navigateToWishList() {}
 
-  void navigateToLearningRemainders() {}
+  void navigateToLearningReminders() {}
 
   void navigateToBuyCourse() {}
 
@@ -31,6 +35,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    List<ProfileMenu> profileMenus = [
+      ProfileMenu(
+        icon: CupertinoIcons.settings,
+        title: 'Settings',
+        function: navigateToSettings,
+      ),
+      ProfileMenu(
+        icon: Icons.wallet,
+        title: 'Payment Details',
+        function: navigateToPaymentDetails,
+      ),
+      ProfileMenu(
+        icon: Icons.credit_card,
+        title: 'Buy course',
+        function: navigateToBuyCourse,
+      ),
+      ProfileMenu(
+        icon: CupertinoIcons.heart_fill,
+        title: 'Wishlist',
+        function: navigateToWishList,
+      ),
+      ProfileMenu(
+        icon: CupertinoIcons.alarm,
+        title: 'Learning Reminder',
+        function: navigateToLearningReminders,
+      )
+    ];
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -182,9 +215,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     height: 60,
                     width: size.width / 0.9,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -247,35 +283,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 350,
-                    child: ListView(
-                      children: [
-                        SingleProfileMenuTile(
-                          icon: CupertinoIcons.settings,
-                          title: 'Settings',
-                          fnc: navigateToSettings,
-                        ),
-                        SingleProfileMenuTile(
-                          icon: Icons.wallet,
-                          title: 'Payment Details',
-                          fnc: navigateToPaymentDetails,
-                        ),
-                        SingleProfileMenuTile(
-                          icon: Icons.credit_card,
-                          title: 'Buy course',
-                          fnc: navigateToBuyCourse,
-                        ),
-                        SingleProfileMenuTile(
-                          icon: CupertinoIcons.heart_fill,
-                          title: 'Wishlist',
-                          fnc: navigateToWishList,
-                        ),
-                        SingleProfileMenuTile(
-                          icon: CupertinoIcons.alarm,
-                          title: 'Learning Remainder',
-                          fnc: navigateToWishList,
-                        )
-                      ],
+                    height: size.height / 2.5,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.only(top: 10),
+                      itemCount: profileMenus.length,
+                      itemBuilder: (context, index) => SingleProfileMenuTile(
+                        icon: profileMenus[index].icon,
+                        title: profileMenus[index].title,
+                        fnc: profileMenus[index].function,
+                      ),
                     ),
                   )
                 ],

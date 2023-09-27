@@ -1,5 +1,6 @@
 import 'package:edu_guru/business_logic/category/category_cubit.dart';
 import 'package:edu_guru/business_logic/export.dart';
+import 'package:edu_guru/business_logic/settings/settings_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocProviders {
@@ -28,5 +29,10 @@ class AppBlocProviders {
         BlocProvider(
           create: (context) => CategoryCubit(),
         ),
+
+        // settings bloc
+        BlocProvider(
+          create: (context) => SettingsBloc(),
+        )
       ];
 }

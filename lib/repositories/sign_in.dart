@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/constants/constants.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
@@ -40,7 +38,8 @@ class SignInRepo {
             return;
           }
           //setting user token
-          Global.storageService.setStringValue(AppConstants.userTokenKey, credential.user!.uid);
+          Global.storageService
+              .setStringValue(AppConstants.userTokenKey, credential.user!.uid);
           navigateToMain();
         } on FirebaseAuthException catch (e) {
           String error = "Error occurred!";
@@ -88,5 +87,15 @@ class SignInRepo {
     EasyLoading.dismiss();
     Global.storageService.setBoolValue(AppConstants.isUserLoggedIn, true);
     Navigator.of(context).pushNamed(AppRoutes.homeScreen);
+  }
+
+  Future<void> signOut() async {
+    EasyLoading.show();
+    await FirebaseAuth.instance.signOut();
+  }
+
+  void navigateToSignIn() {
+    EasyLoading.dismiss();
+    Navigator.of(context).pushNamed(AppRoutes.signInScreen);
   }
 }

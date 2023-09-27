@@ -1,16 +1,14 @@
-import 'dart:async';
-
 import 'package:edu_guru/business_logic/export.dart';
+import 'package:edu_guru/business_logic/settings/settings_bloc.dart';
 import 'package:edu_guru/pages/main/application/main_entry.dart';
+import 'package:edu_guru/pages/main/application/profile/preliminary/settings.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/main/authentication/sign_up.dart';
 import 'package:edu_guru/pages/main/error_screen.dart';
 import 'package:edu_guru/pages/splash/entry.dart';
 import 'package:edu_guru/pages/splash/splash.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../constants/constants.dart';
 import '../../global_config/global.dart';
 import '../routes/app_routes.dart';
@@ -50,6 +48,13 @@ class AppPages {
           route: AppRoutes.homeScreen,
           page: const MainEntryScreen(),
         ),
+        PageEntity(
+          route: AppRoutes.settingScreen,
+          page: const SettingsScreen(),
+          bloc: BlocProvider(
+            create: (_) => SettingsBloc(),
+          ),
+        )
       ];
 
   static List<dynamic> allBlocProviders(BuildContext context) {
@@ -66,6 +71,7 @@ class AppPages {
       // check if routeSettings is available in routes
       var result =
           routes().where((element) => element.route == routeSettings.name);
+      print(result.first.route);
 
       if (result.isNotEmpty) {
         bool isAppPreviouslyRan =
@@ -74,19 +80,17 @@ class AppPages {
         bool isUserLoggedIn =
             Global.storageService.getBoolValue(AppConstants.isUserLoggedIn);
 
-        if (isAppPreviouslyRan) {
-
+        if (result.first.route == AppRoutes.entryScreen && isAppPreviouslyRan) {
           if (isUserLoggedIn) {
             return MaterialPageRoute(
               builder: (_) => const MainEntryScreen(),
               settings: routeSettings,
             );
-          } else {
-            return MaterialPageRoute(
-              builder: (_) => const SignInScreen(),
-              settings: routeSettings,
-            );
           }
+          return MaterialPageRoute(
+            builder: (_) => const SignInScreen(),
+            settings: routeSettings,
+          );
         }
       }
 

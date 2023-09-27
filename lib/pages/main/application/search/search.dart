@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../constants/color.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../components/drawer.dart';
+import '../../components/search_section.dart';
 import '../../widgets/drawer_opener.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -17,8 +16,11 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
 
+  void setFilter() {}
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -39,19 +41,11 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Column(
             children: [
-              TextField(
-                controller: searchController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    CupertinoIcons.search,
-                    color: Colors.black,
-                  ),
-                  hintText: 'Enter search keyword',
-                  label: Text(
-                    'Search Here',
-                  ),
-                ),
-              )
+              SearchSection(
+                size: size,
+                searchController: searchController,
+                setFilter: setFilter,
+              ),
             ],
           ),
         ),
