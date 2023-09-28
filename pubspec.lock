@@ -233,6 +233,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  cool_alert:
+    dependency: "direct main"
+    description:
+      name: cool_alert
+      sha256: "080a6c3503a4cded8f626cdead23f17ea40ff066ff50847d71a7a264032ab092"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   crypto:
     dependency: transitive
     description:
@@ -385,6 +393,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flare_flutter:
+    dependency: transitive
+    description:
+      name: flare_flutter
+      sha256: "99d63c60f00fac81249ce6410ee015d7b125c63d8278a30da81edf3317a1f6a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -648,6 +664,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  lottie:
+    dependency: transitive
+    description:
+      name: lottie
+      sha256: b8bdd54b488c54068c57d41ae85d02808da09e2bee8b8dd1f59f441e7efa60cd
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
   matcher:
     dependency: transitive
     description:
