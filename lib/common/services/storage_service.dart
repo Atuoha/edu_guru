@@ -23,6 +23,12 @@ class StorageService {
     await _prefs.setString(key, value);
   }
 
+
+  // remove key
+  Future<void> removeKey(String key)async{
+    await _prefs.remove(key);
+  }
+
   // set bool value
   Future<void> setBoolValue(String key, bool value) async {
     await _prefs.setBool(key, value);

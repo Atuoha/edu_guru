@@ -126,13 +126,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
                             return null;
                           },
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
                               Icons.person,
                               color: Colors.black,
                             ),
                             hintText: 'John Doe',
-                            label: const Text(
+                            label: Text(
                               'Username',
                             ),
                           ),
@@ -262,7 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             hintText: '*******',
                             label: const Text(
-                              'Password',
+                              'Confirm Password',
                             ),
                           ),
                         ),

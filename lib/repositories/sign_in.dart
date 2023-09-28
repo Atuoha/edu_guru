@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
 import '../business_logic/sign_in/sign_in_bloc.dart';
 import '../common/routes/app_routes.dart';
 import '../constants/enums/status.dart';
@@ -85,17 +84,60 @@ class SignInRepo {
 
   void navigateToMain() {
     EasyLoading.dismiss();
+    // set logged in to true
     Global.storageService.setBoolValue(AppConstants.isUserLoggedIn, true);
-    Navigator.of(context).pushNamed(AppRoutes.homeScreen);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoutes.homeScreen,
+      (route) => false,
+    );
   }
 
   Future<void> signOut() async {
     EasyLoading.show();
-    await FirebaseAuth.instance.signOut();
+    // logout
+    try {
+      await FirebaseAuth.instance.signOut();
+      navigateToSignIn();
+    } on FirebaseAuthException catch (e) {
+      String error = "Error occurred!";
+      if (e.message != null) {
+        if (e.code == 'user-not-found') {
+          error = "Email not recognised!";
+        } else if (e.code == 'account-exists-with-different-credential') {
+          error = "Email already in use!";
+        } else if (e.code == 'wrong-password') {
+          error = 'Email or Password Incorrect!';
+        } else if (e.code == 'network-request-failed') {
+          error = 'Network error!';
+        } else {
+          error = e.code;
+        }
+      }
+      EasyLoading.dismiss();
+      toastInfo(msg: 'Ops! $error', status: Status.error);
+
+      if (kDebugMode) {
+        print(error);
+      }
+    } catch (e) {
+      print('Error occurred');
+    }
   }
 
   void navigateToSignIn() {
+    // dismiss loading
     EasyLoading.dismiss();
-    Navigator.of(context).pushNamed(AppRoutes.signInScreen);
+
+    // set token to empty
+    Global.storageService.removeKey(AppConstants.userTokenKey);
+
+    // set logged in to false
+    Global.storageService.removeKey(AppConstants.isUserLoggedIn);
+
+    // navigate to sign in screen
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoutes.signInScreen,
+      (route) => false,
+    );
   }
 }

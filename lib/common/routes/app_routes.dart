@@ -13,6 +13,7 @@ class AppRoutes {
   static const String homeScreen = '/homeScreen';
   static const String errorScreen = '/errorScreen';
   static const String settingScreen = '/settingScreen';
+  static const String changePassword = '/changePassword';
 }
 
 final routes = {

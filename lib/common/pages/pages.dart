@@ -1,6 +1,8 @@
+import 'package:edu_guru/business_logic/change_password/change_password_bloc.dart';
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/business_logic/settings/settings_bloc.dart';
 import 'package:edu_guru/pages/main/application/main_entry.dart';
+import 'package:edu_guru/pages/main/application/profile/preliminary/change_password.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/settings.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/main/authentication/sign_up.dart';
@@ -15,10 +17,13 @@ import '../routes/app_routes.dart';
 
 class AppPages {
   static List<PageEntity> routes() => [
+        // entry screen
         PageEntity(
           route: AppRoutes.entryScreen,
           page: const EntryScreen(),
         ),
+
+        // splash screen
         PageEntity(
           route: AppRoutes.splashScreen,
           page: const SplashScreen(),
@@ -26,10 +31,14 @@ class AppPages {
             create: (_) => SplashBloc(),
           ),
         ),
+
+        // error screen
         PageEntity(
           route: AppRoutes.errorScreen,
           page: const ErrorScreen(),
         ),
+
+        // sign in screen
         PageEntity(
           route: AppRoutes.signInScreen,
           page: const SignInScreen(),
@@ -37,6 +46,8 @@ class AppPages {
             create: (_) => SignInBloc(),
           ),
         ),
+
+        // sign up screen
         PageEntity(
           route: AppRoutes.signUpScreen,
           page: const SignUpScreen(),
@@ -44,17 +55,30 @@ class AppPages {
             create: (_) => SignUpBloc(),
           ),
         ),
+
+        // home screen
         PageEntity(
           route: AppRoutes.homeScreen,
           page: const MainEntryScreen(),
         ),
+
+        // settings screen
         PageEntity(
           route: AppRoutes.settingScreen,
           page: const SettingsScreen(),
           bloc: BlocProvider(
             create: (_) => SettingsBloc(),
           ),
-        )
+        ),
+
+        // change password screen
+        PageEntity(
+          route: AppRoutes.changePassword,
+          page: const ChangePasswordScreen(),
+          bloc: BlocProvider(
+            create: (_) => ChangePasswordBloc(),
+          ),
+        ),
       ];
 
   static List<dynamic> allBlocProviders(BuildContext context) {
@@ -71,7 +95,6 @@ class AppPages {
       // check if routeSettings is available in routes
       var result =
           routes().where((element) => element.route == routeSettings.name);
-      print(result.first.route);
 
       if (result.isNotEmpty) {
         bool isAppPreviouslyRan =

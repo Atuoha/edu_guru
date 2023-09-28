@@ -1,11 +1,12 @@
+import 'package:edu_guru/common/routes/app_routes.dart';
 import 'package:edu_guru/common/theme/styles_manager.dart';
 import 'package:edu_guru/repositories/repos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../common/theme/font_manager.dart';
 import '../../../../../constants/color.dart';
 import '../../../widgets/are_you_sure_dialog.dart';
+import '../../../widgets/settings_menu_tile.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -31,6 +32,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     signInRepo.signOut();
   }
 
+  // navigate to change password
+  void navigateToChangePassword(){
+    print('Pressing this');
+    Navigator.of(context).pushNamed(AppRoutes.changePassword);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 18.0,
+          horizontal: 19.0,
           vertical: 10,
         ),
         child: SingleChildScrollView(
@@ -66,36 +73,98 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text('Settings'),
-              )
+              SettingsMenuTile(
+                title: 'Edit Account',
+                fnc: () => null,
+              ),
+              SettingsMenuTile(
+                title: 'Change your password',
+                fnc:  navigateToChangePassword,
+              ),
+              SettingsMenuTile(
+                title: 'Security & privacy',
+                fnc: () => null,
+              ),
+              const Divider(
+                color: AppColors.primaryFourElementText,
+              ),
+              const SizedBox(height: 30),
+              Text(
+                'Notification',
+                style: getBoldStyle(
+                  color: Colors.black,
+                  fontSize: FontSize.s16,
+                ),
+              ),
+              SettingsMenuTile(
+                title: 'Notification',
+                fnc: () => null,
+              ),
+              SettingsMenuTile(
+                title: 'App Notification',
+                fnc: () => null,
+              ),
+              const Divider(
+                color: AppColors.primaryFourElementText,
+              ),
+              const SizedBox(height: 30),
+              Text(
+                'Others',
+                style: getBoldStyle(
+                  color: Colors.black,
+                  fontSize: FontSize.s16,
+                ),
+              ),
+              SettingsMenuTile(
+                title: 'Language',
+                fnc: () => null,
+              ),
+              SettingsMenuTile(
+                title: 'Country',
+                fnc: () => null,
+              ),
             ],
           ),
         ),
       ),
-      bottomSheet: GestureDetector(
-        onTap: () => signOutDialog(),
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: AppColors.primaryFourElementText,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Sign out',
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.normal,
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: () => signOutDialog(),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: AppColors.primaryFourElementText,
+                  ),
+                ),
+                child: Center(
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      const Icon(Icons.logout),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Sign out',
+                        style: TextStyle(
+                          color: AppColors.primaryText,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
+            const SizedBox(height: 20),
+          ],
         ),
       ),
     );
