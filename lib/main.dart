@@ -27,7 +27,7 @@ class EduGuru extends StatelessWidget {
     EasyLoading.instance
       ..dismissOnTap = false
       ..indicatorType = EasyLoadingIndicatorType.fadingCircle
-      ..animationDuration = const Duration(seconds: 5)
+      ..animationDuration = const Duration(seconds: 3)
       ..loadingStyle = EasyLoadingStyle.light;
 
     return MultiBlocProvider(

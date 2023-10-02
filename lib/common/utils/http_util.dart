@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../../constants/constants.dart';
+
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
 
@@ -9,7 +11,7 @@ class HttpUtil {
 
   HttpUtil._internal() {
     BaseOptions options = BaseOptions(
-      baseUrl: 'http://192.168.43.118:8000/',
+      baseUrl: AppConstants.serverAPI_URL,
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 5),
       responseType: ResponseType.json,
@@ -20,7 +22,7 @@ class HttpUtil {
   }
 
   // post
-  Future<void> post(
+  Future post(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameter,
@@ -35,7 +37,7 @@ class HttpUtil {
   }
 
   // get
-  Future<void> get(
+  Future get(
     String path, {
     Map<String, dynamic>? queryParameter,
   }) async {

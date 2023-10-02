@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import '../constants/constants.dart';
 import '../constants/enums/status.dart';
 import '../pages/main/widgets/flutter_toast.dart';
 
@@ -14,6 +15,7 @@ class SignUpRepo {
   final BuildContext context;
 
   SignUpRepo({required this.context});
+
   void handleSignUp() async {
     final state = context.read<SignUpBloc>().state;
     final email = state.email;
@@ -23,7 +25,7 @@ class SignUpRepo {
     try {
       EasyLoading.show();
       UserCredential credential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -31,24 +33,26 @@ class SignUpRepo {
       var user = credential.user;
 
       if (user != null) {
-        user.sendEmailVerification();
-        user.updateDisplayName(username);
-        user.updateEmail(email);
+        await user.sendEmailVerification();
+        await user.updateDisplayName(username);
+        await user.updateEmail(email);
+        await user.updatePhotoURL(AppConstants.defaultImg);
+
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'user_id': user.uid,
+          'email': user.email,
+          'username': username,
+          'photo_url': AppConstants.defaultImg
+        });
+
+        toastInfo(
+          msg: 'Success! Account created. Check your email for verification.',
+          status: Status.success,
+        );
+
+        Future.delayed(const Duration(seconds: 3));
+        navigateBack();
       }
-
-      await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
-        'user_id': user.uid,
-        'email': user.email,
-        'username': username,
-      });
-
-      toastInfo(
-        msg: 'Success! Account created. Check your email for verification.',
-        status: Status.success,
-      );
-
-      Future.delayed(const Duration(seconds: 3));
-      navigateBack();
     } on FirebaseAuthException catch (e) {
       String error = "Error occurred!";
       if (e.message != null) {

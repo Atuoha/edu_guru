@@ -28,7 +28,7 @@ class UserController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(),
             [    
-                // 'avatar' =>'required',
+                'avatar' =>'required',
                   'type' => 'required',
                  'open_id' => 'required',
                 'name' => 'required',

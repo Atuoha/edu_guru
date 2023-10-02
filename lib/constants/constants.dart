@@ -3,4 +3,7 @@ class AppConstants {
   static const String isUserLoggedIn = 'isUserLoggedIn';
   static const String userTokenKey = 'userTokenKey';
   static const String userProfileKey = 'userProfileKey';
+
+  static const String defaultImg ='https://miro.medium.com/v2/resize:fit:790/1*reXbWdk_3cew69RuAUbVzg.png';
+  static const String serverAPI_URL = 'http://192.168.43.118:8000/';
 }

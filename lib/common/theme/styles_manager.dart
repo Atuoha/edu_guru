@@ -15,7 +15,7 @@ TextStyle _getTextStyle(
   );
 }
 
-// regular fontstyle
+// regular font style
 TextStyle getRegularStyle({
   fontSize = FontSize.s14,
   required Color color,

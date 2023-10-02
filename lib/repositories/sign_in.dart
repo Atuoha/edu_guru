@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/common/models/entities.dart';
 import 'package:edu_guru/constants/constants.dart';
@@ -55,16 +56,13 @@ class SignInRepo {
             loginRequestEntity.avatar = photoUrl;
             loginRequestEntity.email = emailAddress;
             loginRequestEntity.open_id = userId;
-            loginRequestEntity.phone = phoneNumber;
+            // loginRequestEntity.phone = phoneNumber;
             loginRequestEntity.type = 1;
             loginRequestEntity.name = username;
 
-            asyncPostData(loginRequestEntity);
-
-            //setting user token
-            // Global.storageService.setStringValue(
-            //     AppConstants.userTokenKey, credential.user!.uid);
-            // navigateToMain();
+            asyncPostData(
+              loginRequestEntity: loginRequestEntity,
+            );
           }
         } on FirebaseAuthException catch (e) {
           String error = "Error occurred!";
@@ -108,6 +106,7 @@ class SignInRepo {
     }
   }
 
+  // navigating to main screen after signing in
   void navigateToMain() {
     EasyLoading.dismiss();
     // set logged in to true
@@ -118,6 +117,7 @@ class SignInRepo {
     );
   }
 
+  // sign out
   Future<void> signOut() async {
     EasyLoading.show();
     // logout
@@ -150,6 +150,7 @@ class SignInRepo {
     }
   }
 
+  // for navigating to sign in after signing out
   void navigateToSignIn() {
     // dismiss loading
     EasyLoading.dismiss();
@@ -167,10 +168,36 @@ class SignInRepo {
     );
   }
 
-
-  Future<void> asyncPostData(LoginRequestEntity loginRequestEntity)async{
+  // API data action and setting data
+  Future<void> asyncPostData({
+    required LoginRequestEntity loginRequestEntity,
+  }) async {
     EasyLoading.show();
     var result = await UserAPI.login(params: loginRequestEntity);
+    if (result.code == 200) {
+      try {
+        //setting user token
+        Global.storageService.setStringValue(
+          AppConstants.userTokenKey,
+          result.data!.access_token.toString(),
+        );
 
+        //setting user profile details
+        Global.storageService.setStringValue(
+          AppConstants.userProfileKey,
+          jsonEncode(result.data),
+        );
+
+        EasyLoading.dismiss(); // dismissing loading
+        navigateToMain(); // navigating to main screen
+      } catch (e) {
+        print("Setting user token error ${e.toString()}");
+        toastInfo(msg: 'Ops! An error occurred.', status: Status.error);
+        EasyLoading.dismiss();
+      }
+    } else {
+      toastInfo(msg: 'Ops! ${result.msg}.', status: Status.error);
+      EasyLoading.dismiss();
+    }
   }
 }
