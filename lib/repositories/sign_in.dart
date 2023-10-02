@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:edu_guru/business_logic/export.dart';
+import 'package:edu_guru/common/models/entities.dart';
 import 'package:edu_guru/constants/constants.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../business_logic/sign_in/sign_in_bloc.dart';
+import '../common/apis/user_api.dart';
 import '../common/routes/app_routes.dart';
 import '../constants/enums/status.dart';
 import '../global_config/global.dart';
@@ -36,10 +38,34 @@ class SignInRepo {
             toastInfo(msg: 'Ops! Email not verified!', status: Status.error);
             return;
           }
-          //setting user token
-          Global.storageService
-              .setStringValue(AppConstants.userTokenKey, credential.user!.uid);
-          navigateToMain();
+
+          User? user = credential.user;
+          if (user != null) {
+            String? username = user.displayName;
+            String? emailAddress = user.email;
+            String? userId = user.uid;
+            String? photoUrl = user.photoURL;
+            String? phoneNumber = user.phoneNumber;
+
+            print("Open_id: $userId");
+            print("Photo_url: $photoUrl");
+            print("Phone: $phoneNumber");
+
+            LoginRequestEntity loginRequestEntity = LoginRequestEntity();
+            loginRequestEntity.avatar = photoUrl;
+            loginRequestEntity.email = emailAddress;
+            loginRequestEntity.open_id = userId;
+            loginRequestEntity.phone = phoneNumber;
+            loginRequestEntity.type = 1;
+            loginRequestEntity.name = username;
+
+            asyncPostData(loginRequestEntity);
+
+            //setting user token
+            // Global.storageService.setStringValue(
+            //     AppConstants.userTokenKey, credential.user!.uid);
+            // navigateToMain();
+          }
         } on FirebaseAuthException catch (e) {
           String error = "Error occurred!";
           if (e.message != null) {
@@ -139,5 +165,12 @@ class SignInRepo {
       AppRoutes.signInScreen,
       (route) => false,
     );
+  }
+
+
+  Future<void> asyncPostData(LoginRequestEntity loginRequestEntity)async{
+    EasyLoading.show();
+    var result = await UserAPI.login(params: loginRequestEntity);
+
   }
 }

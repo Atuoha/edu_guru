@@ -4,6 +4,7 @@ import 'package:edu_guru/pages/main/components/search_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:redacted/redacted.dart';
 import '../../../constants/color.dart';
 import '../../../gen/assets.gen.dart';
 import '../components/drawer.dart';
@@ -96,6 +97,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: size,
                       searchController: searchController,
                       setFilter: setFilter,
+                    ),
+                  ).redacted(
+                    context: context,
+                    redact: true,
+                    configuration: RedactedConfiguration(
+                      animationDuration: const Duration(
+                        milliseconds: 800,
+                      ), //default
                     ),
                   ),
                   const SizedBox(height: 10),

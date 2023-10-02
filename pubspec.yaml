@@ -56,6 +56,8 @@ dependencies:
   carousel_slider: ^4.2.1
   dots_indicator: ^3.0.0
   cool_alert: ^2.0.1
+  redacted: ^1.0.10
+  dio: ^5.3.3
 
 
 dev_dependencies:
