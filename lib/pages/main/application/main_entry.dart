@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:flutter/services.dart';
 import 'chat/chat.dart';
 import 'courses/courses.dart';
 import 'home.dart';
@@ -36,6 +37,12 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: AppColors.primaryColor,
+      ),
+    );
+
     return Scaffold(
       bottomNavigationBar: ConvexAppBar(
         backgroundColor: AppColors.primaryColor,

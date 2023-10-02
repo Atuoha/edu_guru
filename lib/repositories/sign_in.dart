@@ -173,7 +173,7 @@ class SignInRepo {
     required LoginRequestEntity loginRequestEntity,
   }) async {
     EasyLoading.show();
-    var result = await UserAPI.login(params: loginRequestEntity);
+    var result = await UserAPI.login(params: loginRequestEntity); // API Call
     if (result.code == 200) {
       try {
         //setting user token
@@ -192,12 +192,12 @@ class SignInRepo {
         navigateToMain(); // navigating to main screen
       } catch (e) {
         print("Setting user token error ${e.toString()}");
+        EasyLoading.dismiss(); // dismissing loading
         toastInfo(msg: 'Ops! An error occurred.', status: Status.error);
-        EasyLoading.dismiss();
       }
     } else {
-      toastInfo(msg: 'Ops! ${result.msg}.', status: Status.error);
-      EasyLoading.dismiss();
+      EasyLoading.dismiss(); // dismissing loading
+      toastInfo(msg: 'Ops! An error occurred - ${result.msg}.', status: Status.error);
     }
   }
 }

@@ -283,7 +283,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height / 2.5,
+                    height: size.height / 1.8,
                     child: ListView.builder(
                       padding: const EdgeInsets.only(top: 10),
                       itemCount: profileMenus.length,

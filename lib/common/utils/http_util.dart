@@ -32,7 +32,6 @@ class HttpUtil {
       data: data,
       queryParameters: queryParameter,
     );
-    print("Response ${response.toString()}");
     return response.data;
   }
 
@@ -45,7 +44,6 @@ class HttpUtil {
       path,
       queryParameters: queryParameter,
     );
-    print("Response Data: ${response.toString()}");
     return response.data;
   }
 }

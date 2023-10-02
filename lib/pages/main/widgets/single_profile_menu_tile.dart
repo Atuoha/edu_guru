@@ -21,24 +21,27 @@ class SingleProfileMenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => fnc(),
-      child: ListTile(
-        leading: Container(
-          width: 35.w,
-          height: 35.h,
-          decoration: BoxDecoration(
-            color: AppColors.secondaryOpacity,
-            borderRadius: BorderRadius.circular(10),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20),
+        child: ListTile(
+          leading: Container(
+            width: 35.w,
+            height: 35.h,
+            decoration: BoxDecoration(
+              color: AppColors.secondaryOpacity,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              icon,
+              color: Colors.white,
+            ),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-          ),
-        ),
-        title: Text(
-          title,
-          style: getBoldStyle(
-            color: Colors.black,
-            fontSize: FontSize.s16,
+          title: Text(
+            title,
+            style: getBoldStyle(
+              color: Colors.black,
+              fontSize: FontSize.s16,
+            ),
           ),
         ),
       ),
