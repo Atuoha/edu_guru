@@ -1,3 +1,4 @@
+import 'package:edu_guru/pages/main/application/profile/preliminary/edit_profile.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/settings.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/main/authentication/sign_up.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String errorScreen = '/errorScreen';
   static const String settingScreen = '/settingScreen';
   static const String changePassword = '/changePassword';
+  static const String editProfileScreen = '/editProfileScreen';
 }
 
 final routes = {
@@ -23,4 +25,5 @@ final routes = {
   AppRoutes.signUpScreen: (context) => const SignUpScreen(),
   AppRoutes.homeScreen: (context) => const MainEntryScreen(),
   AppRoutes.settingScreen: (context) => const SettingsScreen(),
+  AppRoutes.editProfileScreen: (context)=> const EditProfileScreen(),
 };

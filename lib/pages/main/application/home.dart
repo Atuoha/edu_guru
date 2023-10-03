@@ -38,8 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // Todo carousel continue fnc
   }
 
-
-
   @override
   void initState() {
     super.initState();
@@ -120,23 +118,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 10),
                   BlocBuilder<CarouselSliderCubit, CarouselSliderState>(
-                    builder: (context, state) =>
-                        Column(
-                          children: [
-                            KCarouselSlider(
-                              carouselSliders: state.carouselSliders,
-                              setCurrentCarouselIndex: context
-                                  .read<CarouselSliderCubit>()
-                                  .setCurrentCarouselIndex,
-                              carouselContinueFnc: carouselContinueFnc,
-                            ),
-                            const SizedBox(height: 10),
-                            KDotsIndicator(
-                              currentCarouselIndex: state.currentCarouselIndex,
-                              carouselSliders: state.carouselSliders,
-                            ),
-                          ],
+                    builder: (context, state) => Column(
+                      children: [
+                        KCarouselSlider(
+                          carouselSliders: state.carouselSliders,
+                          setCurrentCarouselIndex: context
+                              .read<CarouselSliderCubit>()
+                              .setCurrentCarouselIndex,
+                          carouselContinueFnc: carouselContinueFnc,
                         ),
+                        const SizedBox(height: 10),
+                        KDotsIndicator(
+                          currentCarouselIndex: state.currentCarouselIndex,
+                          carouselSliders: state.carouselSliders,
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Padding(
@@ -166,15 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   childAspectRatio: 1.6,
                 ),
                 delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) =>
-                      GestureDetector(
-                        onTap: () => null,
-                        child: SingleGridCourse(
-                          courseTitle: 'A course',
-                          numberOfCourses: '101 courses',
-                          imgUrl: Assets.icons.image1.path,
-                        ),
-                      ),
+                  (BuildContext context, int index) => GestureDetector(
+                    onTap: () => null,
+                    child: SingleGridCourse(
+                      courseTitle: 'A course',
+                      numberOfCourses: '101 courses',
+                      imgUrl: Assets.icons.image1.path,
+                    ),
+                  ),
                 ),
               ),
             )

@@ -22,7 +22,7 @@ class SingleProfileMenuTile extends StatelessWidget {
     return GestureDetector(
       onTap: () => fnc(),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         child: ListTile(
           leading: Container(
             width: 35.w,

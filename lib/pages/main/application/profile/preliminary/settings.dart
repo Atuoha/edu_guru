@@ -20,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void signOutDialog() {
     areYouSureDialog(
       title: 'Sign out account',
-      content: 'Are you sure you want to sign out your account',
+      content: 'Are you sure you want to sign out your account?',
       context: context,
       action: signOut,
     );

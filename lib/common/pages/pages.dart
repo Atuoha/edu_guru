@@ -3,6 +3,7 @@ import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/business_logic/settings/settings_bloc.dart';
 import 'package:edu_guru/pages/main/application/main_entry.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/change_password.dart';
+import 'package:edu_guru/pages/main/application/profile/preliminary/edit_profile.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/settings.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
 import 'package:edu_guru/pages/main/authentication/sign_up.dart';
@@ -78,6 +79,12 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => ChangePasswordBloc(),
           ),
+        ),
+
+        // edit profile screen
+        PageEntity(
+          route: AppRoutes.editProfileScreen,
+          page: const EditProfileScreen(),
         ),
       ];
 

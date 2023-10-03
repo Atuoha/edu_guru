@@ -161,6 +161,9 @@ class SignInRepo {
     // set logged in to false
     Global.storageService.removeKey(AppConstants.isUserLoggedIn);
 
+    // set profile key to empty
+    Global.storageService.removeKey(AppConstants.userProfileKey);
+
     // navigate to sign in screen
     Navigator.of(context).pushNamedAndRemoveUntil(
       AppRoutes.signInScreen,

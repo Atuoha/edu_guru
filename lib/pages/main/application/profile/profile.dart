@@ -35,6 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void navigateToMyCourses() {}
 
+  void navigateToEditProfile(){
+    Navigator.of(context).pushNamed(AppRoutes.editProfileScreen);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -120,18 +124,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Positioned(
                               bottom: 3,
                               right: 5,
-                              child: Container(
-                                height: 15.h,
-                                width: 15.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.secondaryOpacity,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Image.asset(
-                                    Assets.icons.editIcon.path,
-                                    color: Colors.white,
+                              child: GestureDetector(
+                                onTap: ()=>navigateToEditProfile(),
+                                child: Container(
+                                  height: 15.h,
+                                  width: 15.h,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.secondaryOpacity,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Image.asset(
+                                      Assets.icons.editIcon.path,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -180,19 +187,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Positioned(
                                 bottom: 3,
                                 right: 5,
-                                child: Container(
-                                  height: 30.h,
-                                  width: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.secondaryColor
-                                        .withOpacity(0.8),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Assets.icons.editIcon.path,
-                                      color: Colors.white,
+                                child: GestureDetector(
+                                  onTap: ()=>navigateToEditProfile(),
+                                  child: Container(
+                                    height: 30.h,
+                                    width: 30.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.secondaryColor
+                                          .withOpacity(0.8),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset(
+                                        Assets.icons.editIcon.path,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
