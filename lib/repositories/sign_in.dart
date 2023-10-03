@@ -187,6 +187,7 @@ class SignInRepo {
           AppConstants.userProfileKey,
           jsonEncode(result.data),
         );
+        print("Result -name: ${result.data?.name}, avatar: ${result.data?.avatar}");
 
         EasyLoading.dismiss(); // dismissing loading
         navigateToMain(); // navigating to main screen

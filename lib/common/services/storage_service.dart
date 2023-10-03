@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:edu_guru/common/models/user.dart';
+import 'package:edu_guru/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageService {
@@ -23,6 +27,16 @@ class StorageService {
     await _prefs.setString(key, value);
   }
 
+  // get user profile
+  getUserProfile(){
+    UserItem? userItem;
+    var userProfile = _prefs.getString(AppConstants.userProfileKey) ?? "";
+    print("From the storage $userProfile");
+    if(userProfile.isNotEmpty){
+      userItem = UserItem.fromJson(jsonDecode(userProfile));
+    }
+    return userItem;
+  }
 
   // remove key
   Future<void> removeKey(String key)async{

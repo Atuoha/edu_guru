@@ -6,6 +6,7 @@ import '../../../../common/routes/app_routes.dart';
 import '../../../../common/theme/font_manager.dart';
 import '../../../../constants/color.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../../../repositories/home.dart';
 import '../../widgets/single_profile_menu_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -16,6 +17,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late HomeRepo homeRepo;
+
   void navigateToSettings() {
     Navigator.of(context).pushNamed(AppRoutes.settingScreen);
   }
@@ -31,6 +34,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void navigateToBuyCourse() {}
 
   void navigateToMyCourses() {}
+
+  @override
+  void initState() {
+    super.initState();
+    homeRepo = HomeRepo(context: context);
+    homeRepo.init();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +114,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             CircleAvatar(
                               radius: 25,
                               backgroundColor: AppColors.primaryColor,
-                              backgroundImage: AssetImage(
-                                Assets.icons.b02.path,
-                              ),
+                              backgroundImage:
+                                  NetworkImage(homeRepo.userItem.avatar!),
                             ),
                             Positioned(
                               bottom: 3,
@@ -130,9 +139,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ],
                         ),
                         const SizedBox(width: 10),
-                        const Text(
-                          'John Phil',
-                          style: TextStyle(
+                        Text(
+                          homeRepo.userItem.name!,
+                          style: const TextStyle(
                             fontSize: 12,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -165,9 +174,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               CircleAvatar(
                                 radius: 45,
                                 backgroundColor: Colors.white,
-                                backgroundImage: AssetImage(
-                                  Assets.icons.b02.path,
-                                ),
+                                backgroundImage:
+                                    NetworkImage(homeRepo.userItem.avatar!),
                               ),
                               Positioned(
                                 bottom: 3,
@@ -191,12 +199,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               )
                             ],
                           ),
-                          const Text(
-                            'John Phils',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0, top: 5),
+                            child: Text(
+                              homeRepo.userItem.name!,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],

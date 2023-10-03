@@ -1,6 +1,7 @@
 import 'package:edu_guru/business_logic/carousel_slider/carousel_slider_cubit.dart';
 import 'package:edu_guru/pages/main/components/course_category_section.dart';
 import 'package:edu_guru/pages/main/components/search_section.dart';
+import 'package:edu_guru/repositories/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
+  late HomeRepo homeRepo;
 
   void setFilter() {
     // Todo set filter
@@ -34,6 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void carouselContinueFnc() {
     // Todo carousel continue fnc
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    homeRepo = HomeRepo(context: context);
+    homeRepo.init();
   }
 
   @override
@@ -48,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 18),
-              child: Image.asset(
-                Assets.icons.b02.path,
+              child: Image.network(
+                '${homeRepo.userItem.avatar}',
                 width: 30.w,
               ),
             ),
@@ -71,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hello John!',
+                          'Hello ${homeRepo.userItem.name}!',
                           style: TextStyle(
                             fontSize: 23.sp,
                             color: AppColors.primaryThreeElementText,
@@ -109,22 +120,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 10),
                   BlocBuilder<CarouselSliderCubit, CarouselSliderState>(
-                    builder: (context, state) => Column(
-                      children: [
-                        KCarouselSlider(
-                          carouselSliders: state.carouselSliders,
-                          setCurrentCarouselIndex: context
-                              .read<CarouselSliderCubit>()
-                              .setCurrentCarouselIndex,
-                          carouselContinueFnc: carouselContinueFnc,
+                    builder: (context, state) =>
+                        Column(
+                          children: [
+                            KCarouselSlider(
+                              carouselSliders: state.carouselSliders,
+                              setCurrentCarouselIndex: context
+                                  .read<CarouselSliderCubit>()
+                                  .setCurrentCarouselIndex,
+                              carouselContinueFnc: carouselContinueFnc,
+                            ),
+                            const SizedBox(height: 10),
+                            KDotsIndicator(
+                              currentCarouselIndex: state.currentCarouselIndex,
+                              carouselSliders: state.carouselSliders,
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        KDotsIndicator(
-                          currentCarouselIndex: state.currentCarouselIndex,
-                          carouselSliders: state.carouselSliders,
-                        ),
-                      ],
-                    ),
                   ),
                   const SizedBox(height: 20),
                   Padding(
@@ -154,14 +166,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   childAspectRatio: 1.6,
                 ),
                 delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) => GestureDetector(
-                    onTap: () => null,
-                    child: SingleGridCourse(
-                      courseTitle: 'A course',
-                      numberOfCourses: '101 courses',
-                      imgUrl: Assets.icons.image1.path,
-                    ),
-                  ),
+                      (BuildContext context, int index) =>
+                      GestureDetector(
+                        onTap: () => null,
+                        child: SingleGridCourse(
+                          courseTitle: 'A course',
+                          numberOfCourses: '101 courses',
+                          imgUrl: Assets.icons.image1.path,
+                        ),
+                      ),
                 ),
               ),
             )
