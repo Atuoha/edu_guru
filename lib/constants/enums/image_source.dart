@@ -1,0 +1,3 @@
+enum KImageSource{
+  gallery, camera
+}
