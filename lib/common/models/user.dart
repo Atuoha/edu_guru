@@ -58,6 +58,7 @@ class UserLoginResponseEntity {
 class UserItem {
   String? access_token;
   String? token;
+  String? email;
   String? name;
   String? description;
   String? avatar;
@@ -67,6 +68,7 @@ class UserItem {
   UserItem({
     this.access_token,
     this.token,
+    this.email,
     this.name,
     this.description,
     this.avatar,
@@ -78,6 +80,7 @@ class UserItem {
       UserItem(
         access_token: json["access_token"],
         token: json["token"],
+        email: json['email'],
         name: json["name"],
         description: json["description"],
         avatar: json["avatar"],
@@ -88,6 +91,7 @@ class UserItem {
   Map<String, dynamic> toJson() => {
     "access_token": access_token,
     "token": token,
+    "email":email,
     "name": name,
     "description": description,
     "avatar": avatar,
@@ -98,6 +102,7 @@ class UserItem {
 
 class UserData {
   final String? token;
+  final String? email;
   final String? name;
   final String? avatar;
   final String? description;
@@ -105,6 +110,7 @@ class UserData {
 
   UserData({
     this.token,
+    this.email,
     this.name,
     this.avatar,
     this.description,
@@ -118,6 +124,7 @@ class UserData {
     final data = snapshot.data();
     return UserData(
       token: data?['token'],
+      email: data?['email'],
       name: data?['name'],
       avatar: data?['avatar'],
       description: data?['description'],
@@ -128,6 +135,7 @@ class UserData {
   Map<String, dynamic> toFirestore() {
     return {
       if (token != null) "token": token,
+      if (email != null) "email": email,
       if (name != null) "name": name,
       if (avatar != null) "avatar": avatar,
       if (description != null) "description": description,
