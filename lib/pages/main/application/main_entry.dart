@@ -40,6 +40,7 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         systemNavigationBarColor: AppColors.primaryColor,
+        statusBarColor: Colors.transparent,
       ),
     );
 

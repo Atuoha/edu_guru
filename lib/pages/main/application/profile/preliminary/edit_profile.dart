@@ -67,11 +67,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     // todo save details
   }
 
+  void setValues() {
+    setState(() {
+      usernameController.text = homeRepo.userItem.name!;
+      emailController.text = homeRepo.userItem.email!;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     homeRepo = HomeRepo(context: context);
     homeRepo.init();
+
+    setValues();
   }
 
   @override
@@ -104,266 +113,268 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  isImagePicked
-                      ? CircleAvatar(
-                          radius: 65,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Image.file(
-                            File(selectedImage!.path),
-                          ),
-                        )
-                      : CircleAvatar(
-                          radius: 65,
-                          backgroundColor: AppColors.primaryColor,
-                          backgroundImage: NetworkImage(
-                            homeRepo.userItem.avatar!,
-                          ),
-                        ),
-                  Positioned(
-                    bottom: 3,
-                    right: 5,
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => _selectPhoto(KImageSource.camera),
-                          child: Container(
-                            height: 30.h,
-                            width: 30.h,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondaryOpacity,
-                              shape: BoxShape.circle,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    isImagePicked
+                        ? CircleAvatar(
+                            radius: 65,
+                            backgroundColor: AppColors.primaryColor,
+                            child: Image.file(
+                              File(selectedImage!.path),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Icon(
-                                CupertinoIcons.camera,
-                                color: Colors.white,
+                          )
+                        : CircleAvatar(
+                            radius: 65,
+                            backgroundColor: AppColors.primaryColor,
+                            backgroundImage: NetworkImage(
+                              homeRepo.userItem.avatar!,
+                            ),
+                          ),
+                    Positioned(
+                      bottom: 3,
+                      right: 5,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => _selectPhoto(KImageSource.camera),
+                            child: Container(
+                              height: 30.h,
+                              width: 30.h,
+                              decoration: BoxDecoration(
+                                color: AppColors.secondaryOpacity,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: Icon(
+                                  CupertinoIcons.camera,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () => _selectPhoto(KImageSource.gallery),
-                          child: Container(
-                            height: 30.h,
-                            width: 30.h,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondaryOpacity,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Icon(
-                                CupertinoIcons.photo,
-                                color: Colors.white,
+                          GestureDetector(
+                            onTap: () => _selectPhoto(KImageSource.gallery),
+                            child: Container(
+                              height: 30.h,
+                              width: 30.h,
+                              decoration: BoxDecoration(
+                                color: AppColors.secondaryOpacity,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: Icon(
+                                  CupertinoIcons.photo,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-              Text(
-                'Enter the profiles details that you want to edit',
-                style: getRegularStyle(
-                  color: Colors.black,
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: usernameController,
-                autofocus: true,
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.text,
-                onChanged: (value) {},
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Username can not be empty!';
-                  }
-
-                  if (value.length < 4) {
-                    return 'Username is not valid';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.person,
+                const SizedBox(height: 20),
+                Text(
+                  'Enter the profiles details that you want to edit',
+                  style: getRegularStyle(
                     color: Colors.black,
                   ),
-                  hintText: 'John Doe',
-                  label: Text(
-                    'Username',
-                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: emailController,
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (value) {},
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Email address can not be empty!';
-                  }
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: usernameController,
+                  autofocus: true,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.text,
+                  onChanged: (value) {},
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Username can not be empty!';
+                    }
 
-                  if (!value.contains('@')) {
-                    return 'Email address is not valid';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.black,
-                  ),
-                  hintText: 'johndoe@gmail.com',
-                  label: Text(
-                    'Email',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: phoneNumberController,
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.phone,
-                onChanged: (value) {},
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Phone number can not be empty!';
-                  }
-
-                  if (value.length < 10) {
-                    return 'Phone number is not valid';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    CupertinoIcons.phone,
-                    color: Colors.black,
-                  ),
-                  hintText: '09033-334-9083',
-                  label: Text(
-                    'Phone Number',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              CheckboxListTile(
-                value: changePassword,
-                onChanged: (value) => setState(
-                  () {
-                    changePassword = value!;
+                    if (value.length < 4) {
+                      return 'Username is not valid';
+                    }
+                    return null;
                   },
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.person,
+                      color: Colors.black,
+                    ),
+                    hintText: 'John Doe',
+                    label: Text(
+                      'Username',
+                    ),
+                  ),
                 ),
-                title: const Text('Do you want to change your password'),
-                checkColor: AppColors.secondaryColor,
-                checkboxShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: emailController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (value) {},
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Email address can not be empty!';
+                    }
+
+                    if (!value.contains('@')) {
+                      return 'Email address is not valid';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.email,
+                      color: Colors.black,
+                    ),
+                    hintText: 'johndoe@gmail.com',
+                    label: Text(
+                      'Email',
+                    ),
+                  ),
                 ),
-              ),
-              changePassword
-                  ? TextFormField(
-                      controller: passwordController,
-                      obscureText: isPasswordObscured,
-                      textInputAction: TextInputAction.done,
-                      onChanged: (value) {},
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Password can not be empty!';
-                        }
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: phoneNumberController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value) {},
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Phone number can not be empty!';
+                    }
 
-                        if (value.length < 8) {
-                          return 'Password must be up to 8 characters long';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        suffixIcon: passwordController.text.isNotEmpty
-                            ? GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isPasswordObscured = !isPasswordObscured;
-                                  });
-                                },
-                                child: Icon(
-                                  isPasswordObscured
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.black,
-                                ),
-                              )
-                            : const SizedBox.shrink(),
-                        prefixIcon: const Icon(
-                          Icons.key,
-                          color: Colors.black,
-                        ),
-                        hintText: '*******',
-                        label: const Text(
-                          'Password',
-                        ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              const SizedBox(height: 20),
-              changePassword
-                  ? TextFormField(
-                      controller: confirmPasswordController,
-                      obscureText: isConfirmPasswordObscured,
-                      textInputAction: TextInputAction.done,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Confirm Password can not be empty!';
-                        }
+                    if (value.length < 10) {
+                      return 'Phone number is not valid';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      CupertinoIcons.phone,
+                      color: Colors.black,
+                    ),
+                    hintText: '09033-334-9083',
+                    label: Text(
+                      'Phone Number',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                CheckboxListTile(
+                  value: changePassword,
+                  onChanged: (value) => setState(
+                    () {
+                      changePassword = value!;
+                    },
+                  ),
+                  title: const Text('Do you want to change your password'),
+                  checkColor: Colors.white,
+                  checkboxShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                changePassword
+                    ? TextFormField(
+                        controller: passwordController,
+                        obscureText: isPasswordObscured,
+                        textInputAction: TextInputAction.done,
+                        onChanged: (value) {},
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Password can not be empty!';
+                          }
 
-                        if (passwordController.text != value) {
-                          toastInfo(
-                              msg: 'Password mismatch!', status: Status.error);
-                          return 'Password mismatch!';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        suffixIcon: confirmPasswordController.text.isNotEmpty
-                            ? GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isConfirmPasswordObscured =
-                                        !isConfirmPasswordObscured;
-                                  });
-                                },
-                                child: Icon(
-                                  isConfirmPasswordObscured
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.black,
-                                ),
-                              )
-                            : const SizedBox.shrink(),
-                        prefixIcon: const Icon(
-                          Icons.key,
-                          color: Colors.black,
+                          if (value.length < 8) {
+                            return 'Password must be up to 8 characters long';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          suffixIcon: passwordController.text.isNotEmpty
+                              ? GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      isPasswordObscured = !isPasswordObscured;
+                                    });
+                                  },
+                                  child: Icon(
+                                    isPasswordObscured
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.black,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          prefixIcon: const Icon(
+                            Icons.key,
+                            color: Colors.black,
+                          ),
+                          hintText: '*******',
+                          label: const Text(
+                            'Password',
+                          ),
                         ),
-                        hintText: '*******',
-                        label: const Text(
-                          'Confirm Password',
+                      )
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 20),
+                changePassword
+                    ? TextFormField(
+                        controller: confirmPasswordController,
+                        obscureText: isConfirmPasswordObscured,
+                        textInputAction: TextInputAction.done,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Confirm Password can not be empty!';
+                          }
+
+                          if (passwordController.text != value) {
+                            toastInfo(
+                                msg: 'Password mismatch!', status: Status.error);
+                            return 'Password mismatch!';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          suffixIcon: confirmPasswordController.text.isNotEmpty
+                              ? GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      isConfirmPasswordObscured =
+                                          !isConfirmPasswordObscured;
+                                    });
+                                  },
+                                  child: Icon(
+                                    isConfirmPasswordObscured
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.black,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          prefixIcon: const Icon(
+                            Icons.key,
+                            color: Colors.black,
+                          ),
+                          hintText: '*******',
+                          label: const Text(
+                            'Confirm Password',
+                          ),
                         ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-            ],
+                      )
+                    : const SizedBox.shrink(),
+              ],
+            ),
           ),
         ),
       ),

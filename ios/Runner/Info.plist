@@ -6,6 +6,12 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow Eduguru to use your photo library</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Allow Eduguru to use your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Allow Eduguru to use your microphone</string>
 	<key>CFBundleDisplayName</key>
 	<string>Edu Guru</string>
 	<key>CFBundleExecutable</key>
