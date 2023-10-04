@@ -10,7 +10,7 @@ use Encore\Admin\Show;
 
 class UserController extends AdminController
 {
-    protected $title ='Users';
+    protected $title ='Members';
 
     protected function grid()
     {
