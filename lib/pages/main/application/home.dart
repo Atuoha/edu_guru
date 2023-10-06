@@ -1,7 +1,7 @@
 import 'package:edu_guru/business_logic/carousel_slider/carousel_slider_cubit.dart';
 import 'package:edu_guru/pages/main/components/course_category_section.dart';
 import 'package:edu_guru/pages/main/components/search_section.dart';
-import 'package:edu_guru/repositories/home.dart';
+import 'package:edu_guru/repositories/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

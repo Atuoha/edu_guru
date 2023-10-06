@@ -28,18 +28,22 @@ class StorageService {
   }
 
   // get user profile
-  getUserProfile(){
+  getUserProfile() {
     UserItem? userItem;
     var userProfile = _prefs.getString(AppConstants.userProfileKey) ?? "";
-    print("From the storage $userProfile");
-    if(userProfile.isNotEmpty){
+    if (userProfile.isNotEmpty) {
       userItem = UserItem.fromJson(jsonDecode(userProfile));
     }
     return userItem;
   }
 
+  // get user token
+  String getUserToken() {
+    return _prefs.getString(AppConstants.userTokenKey) ?? "";
+  }
+
   // remove key
-  Future<void> removeKey(String key)async{
+  Future<void> removeKey(String key) async {
     await _prefs.remove(key);
   }
 

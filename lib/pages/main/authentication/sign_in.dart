@@ -2,7 +2,7 @@ import 'package:edu_guru/business_logic/sign_in/sign_in_bloc.dart';
 import 'package:edu_guru/constants/color.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
 import 'package:edu_guru/pages/main/widgets/flutter_toast.dart';
-import 'package:edu_guru/repositories/sign_in.dart';
+import 'package:edu_guru/repositories/sign_in_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

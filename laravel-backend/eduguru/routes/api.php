@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
-
+use App\Http\Controllers\Api\CourseController;
 
 
 /*
@@ -21,5 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login',[UserController::class,'loginUser']);
-Route::post('/register',[UserController::class,'createUser']);
+Route::group(['namespace'=> 'Api'], function(){
+    Route::post('/login','UserController@loginUser');
+    Route::post('/register','UserController@createUser');
+
+
+    Route::group(['middleware'=>['auth:sanctum']], function(){
+        Route::any('/courseList',[CourseController::class,'courseList']);
+
+    });
+});
+
+

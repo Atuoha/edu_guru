@@ -9,6 +9,8 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Request;
+
 
 
 class CourseController extends AdminController
@@ -18,6 +20,7 @@ class CourseController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Course());
+        $baseUrl = Request::root();
 
         $grid->column('id', __('Id'));
         $grid->column('user_token', __('Instructor'))->display(function($token){
@@ -27,7 +30,7 @@ class CourseController extends AdminController
         $grid->column('type_id', __('Course Category'))->display(function ($type_id){
             return CourseType::where("id","=",$type_id)->value('title');
         });
-        $grid->image('thumbnail', __('Thumbnail'));
+        $grid->column('thumbnail', __('Thumbnail'))->image( '',50,50);
         $grid->column('description', __('Description'));
         $grid->column('video', __('Video'));
         $grid->column('video_length', __('Video Length'));
@@ -47,7 +50,7 @@ class CourseController extends AdminController
         $show->field('id', __('Id'));
         $show->field('title', __('Title'));
         $show->field('type_id', __('Course Category'));
-        $show->field('thumbnail', __('Thumbnail'));
+        $show->field('thumbnail', __('Thumbnail'))->image('',150,150);
         $show->field('description', __('Description'));
         $show->field('video', __('Video'));
         $show->field('video_length', __('Video Length'));

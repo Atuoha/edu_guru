@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../constants/constants.dart';
+import '../../global_config/global.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
@@ -26,11 +27,13 @@ class HttpUtil {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameter,
+    Map<String, dynamic>? headers,
   }) async {
     var response = await dio.post(
       path,
       data: data,
       queryParameters: queryParameter,
+      options: Options(headers: headers ?? {}),
     );
     return response.data;
   }
@@ -39,11 +42,23 @@ class HttpUtil {
   Future get(
     String path, {
     Map<String, dynamic>? queryParameter,
+    Map<String, dynamic>? headers,
   }) async {
     var response = await dio.get(
       path,
       queryParameters: queryParameter,
+      options: Options(headers: headers ?? {}),
     );
     return response.data;
+  }
+
+  // get user token
+  Map<String, dynamic>? getAuthorizationHeader() {
+    var header = <String, dynamic>{};
+    var accessToken = Global.storageService.getUserToken();
+    if (accessToken.isNotEmpty) {
+      header['Authorization'] = 'Bearer $accessToken';
+    }
+    return header;
   }
 }

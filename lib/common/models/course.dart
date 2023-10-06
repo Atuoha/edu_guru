@@ -154,7 +154,7 @@ class AuthorItem {
 // login result
 class CourseItem {
   String? user_token;
-  String? name;
+  String? title;
   String? description;
   String? thumbnail;
   String? video;
@@ -169,7 +169,7 @@ class CourseItem {
 
   CourseItem({
     this.user_token,
-    this.name,
+    this.title,
     this.description,
     this.thumbnail,
     this.video,
@@ -186,7 +186,7 @@ class CourseItem {
   factory CourseItem.fromJson(Map<String, dynamic> json) =>
       CourseItem(
         user_token: json["user_token"],
-        name: json["name"],
+        title: json["title"],
         description: json["description"],
         thumbnail: json["thumbnail"],
         video: json["video"],
@@ -202,7 +202,7 @@ class CourseItem {
 
   Map<String, dynamic> toJson() => {
     "user_token": user_token,
-    "name": name,
+    "title": title,
     "description": description,
     "thumbnail": thumbnail,
     "video": video,

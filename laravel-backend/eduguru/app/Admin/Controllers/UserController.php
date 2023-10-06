@@ -31,7 +31,7 @@ class UserController extends AdminController
         $grid->column('email', __('Email'));
         $grid->column('email_verified_at', __('Email verified at'));
         $grid->column('password', __('Password'));
-        $grid->column('avatar', __('Avatar'));
+        $grid->column('avatar', __('Avatar'))->image('',50,50);
         $grid->column('type', __('Type'));
         $grid->column('open_id', __('Open id'));
         $grid->column('access_token', __('Access token'));

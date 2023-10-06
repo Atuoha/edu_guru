@@ -1,6 +1,6 @@
 import 'package:edu_guru/constants/color.dart';
 import 'package:edu_guru/pages/main/widgets/flutter_toast.dart';
-import 'package:edu_guru/repositories/signup.dart';
+import 'package:edu_guru/repositories/signup_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

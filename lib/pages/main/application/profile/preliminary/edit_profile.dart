@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../../constants/color.dart';
 import '../../../../../constants/enums/image_source.dart';
 import '../../../../../constants/enums/status.dart';
-import '../../../../../repositories/home.dart';
+import '../../../../../repositories/home_repo.dart';
 import '../../../widgets/flutter_toast.dart';
 
 class EditProfileScreen extends StatefulWidget {

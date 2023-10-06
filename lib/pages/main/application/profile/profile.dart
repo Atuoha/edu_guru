@@ -6,7 +6,7 @@ import '../../../../common/routes/app_routes.dart';
 import '../../../../common/theme/font_manager.dart';
 import '../../../../constants/color.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../../repositories/home.dart';
+import '../../../../repositories/home_repo.dart';
 import '../../widgets/single_profile_menu_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
