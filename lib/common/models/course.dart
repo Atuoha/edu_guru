@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CourseRequestEntity {
@@ -9,8 +8,8 @@ class CourseRequestEntity {
   });
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-  };
+        "id": id,
+      };
 }
 
 class SearchRequestEntity {
@@ -21,8 +20,8 @@ class SearchRequestEntity {
   });
 
   Map<String, dynamic> toJson() => {
-    "search": search,
-  };
+        "search": search,
+      };
 }
 
 class CourseListResponseEntity {
@@ -40,7 +39,13 @@ class CourseListResponseEntity {
       CourseListResponseEntity(
         code: json["code"],
         msg: json["msg"],
-        data: json["data"] == null ? [] : List<CourseItem>.from(json["data"].map((x) => CourseItem.fromJson(x))),
+        data: json["data"] == null
+            ? []
+            : List<CourseItem>.from(
+                json["data"].map(
+                  (x) => CourseItem.fromJson(x),
+                ),
+              ),
       );
 }
 
@@ -64,8 +69,6 @@ class CourseDetailResponseEntity {
       );
 }
 
-
-
 class AuthorRequestEntity {
   String? token;
 
@@ -74,9 +77,10 @@ class AuthorRequestEntity {
   });
 
   Map<String, dynamic> toJson() => {
-    "token": token,
-  };
+        "token": token,
+      };
 }
+
 //api post response msg
 class AuthorResponseEntity {
   int? code;
@@ -96,8 +100,6 @@ class AuthorResponseEntity {
         data: AuthorItem.fromJson(json["data"]),
       );
 }
-
-
 
 // login result
 class AuthorItem {
@@ -123,8 +125,7 @@ class AuthorItem {
     this.online,
   });
 
-  factory AuthorItem.fromJson(Map<String, dynamic> json) =>
-      AuthorItem(
+  factory AuthorItem.fromJson(Map<String, dynamic> json) => AuthorItem(
         token: json["token"],
         name: json["name"],
         description: json["description"],
@@ -137,19 +138,17 @@ class AuthorItem {
       );
 
   Map<String, dynamic> toJson() => {
-    "token": token,
-    "name": name,
-    "description": description,
-    "avatar": avatar,
-    "job": job,
-    "follow": follow,
-    "score": score,
-    "download": download,
-    "online": online,
-  };
-
+        "token": token,
+        "name": name,
+        "description": description,
+        "avatar": avatar,
+        "job": job,
+        "follow": follow,
+        "score": score,
+        "download": download,
+        "online": online,
+      };
 }
-
 
 // login result
 class CourseItem {
@@ -161,7 +160,7 @@ class CourseItem {
   String? price;
   String? amount_total;
   int? lesson_num;
-  int? video_len;
+  int? video_length;
   int? down_num;
   int? follow;
   int? score;
@@ -176,24 +175,28 @@ class CourseItem {
     this.price,
     this.amount_total,
     this.lesson_num,
-    this.video_len,
+    this.video_length,
     this.down_num,
     this.follow,
     this.score,
     this.id,
   });
 
-  factory CourseItem.fromJson(Map<String, dynamic> json) =>
-      CourseItem(
+
+
+  factory CourseItem.initial()=>CourseItem();
+
+
+  factory CourseItem.fromJson(Map<String, dynamic> json) => CourseItem(
         user_token: json["user_token"],
         title: json["title"],
         description: json["description"],
         thumbnail: json["thumbnail"],
         video: json["video"],
-        price: json["price"],
+        price: json["price"].toString(),
         amount_total: json["amount_total"],
         lesson_num: json["lesson_num"],
-        video_len: json["video_len"],
+    video_length: json["video_length"],
         down_num: json["down_num"],
         follow: json["follow"],
         score: json["score"],
@@ -201,20 +204,18 @@ class CourseItem {
       );
 
   Map<String, dynamic> toJson() => {
-    "user_token": user_token,
-    "title": title,
-    "description": description,
-    "thumbnail": thumbnail,
-    "video": video,
-    "price": price,
-    "amount_total": amount_total,
-    "lesson_num": lesson_num,
-    "video_len": video_len,
-    "down_num": down_num,
-    "follow": follow,
-    "score": score,
-    "id": id,
-  };
-
+        "user_token": user_token,
+        "title": title,
+        "description": description,
+        "thumbnail": thumbnail,
+        "video": video,
+        "price": price,
+        "amount_total": amount_total,
+        "lesson_num": lesson_num,
+        "video_length": video_length,
+        "down_num": down_num,
+        "follow": follow,
+        "score": score,
+        "id": id,
+      };
 }
-

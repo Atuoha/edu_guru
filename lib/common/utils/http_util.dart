@@ -5,9 +5,7 @@ import '../../global_config/global.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
-
   factory HttpUtil() => _instance;
-
   late Dio dio;
 
   HttpUtil._internal() {
