@@ -30,8 +30,18 @@ class CourseListCubit extends Cubit<CourseListState> {
         state.copyWith(
           processingStatus: ProcessingStatus.error,
           error: e,
+
         ),
       );
     }
+  }
+
+  void emitError({required CustomError error}) {
+    emit(
+      state.copyWith(
+        error: error,
+        processingStatus: ProcessingStatus.error,
+      ),
+    );
   }
 }

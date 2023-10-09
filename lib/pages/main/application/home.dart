@@ -1,9 +1,11 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:edu_guru/business_logic/carousel_slider/carousel_slider_cubit.dart';
 import 'package:edu_guru/business_logic/course_list/course_list_cubit.dart';
 import 'package:edu_guru/constants/constants.dart';
 import 'package:edu_guru/constants/enums/processing_status.dart';
 import 'package:edu_guru/pages/main/components/course_category_section.dart';
 import 'package:edu_guru/pages/main/components/search_section.dart';
+import 'package:edu_guru/pages/main/widgets/kcool_alert.dart';
 import 'package:edu_guru/pages/main/widgets/loading.dart';
 import 'package:edu_guru/repositories/home_repo.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +13,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:redacted/redacted.dart';
 import '../../../constants/color.dart';
-import '../../../gen/assets.gen.dart';
 import '../components/drawer.dart';
 import '../widgets/carousel_slider.dart';
 import '../widgets/drawer_opener.dart';
 import '../widgets/kdot_indicator.dart';
-import '../widgets/see_all_courses.dart';
+import '../widgets/row_text.dart';
 import '../widgets/single_grid_course.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,14 +57,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 30.w,
+          leadingWidth: 40.w,
           leading: drawerOpener(context: context),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 18),
-              child: Image.network(
-                '${homeRepo.userItem.avatar}',
-                width: 30.w,
+              child: Container(
+                width: 40.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage('${homeRepo.userItem.avatar}'),
+                  ),
+                ),
               ),
             ),
           ],
@@ -145,7 +151,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SeeAllCourses(seeAllCourses: seeAllCourses),
+                        RowText(
+                          title: 'Select your course',
+                          actionText: 'See all',
+                          actionHandler: seeAllCourses,
+                        ),
                         const SizedBox(height: 20),
                         CourseCategorySection(size: size),
                       ],
@@ -168,9 +178,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         size: 50,
                       ),
                     );
-                  } else if (state.processingStatus ==
-                      ProcessingStatus.error) {
-
+                  } else if (state.processingStatus == ProcessingStatus.error) {
+                    print('Error occurred');
+                    kCoolAlert(
+                      message: 'An error occurred!',
+                      context: context,
+                      alert: CoolAlertType.error,
+                    );
+                    Image.network(AppConstants.errorImg);
                   }
                 },
                 builder: (context, state) {
@@ -196,7 +211,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           size: size,
                           courseTitle: course.title!,
                           numberOfCourses: course.lesson_num.toString(),
-                          imgUrl: '${AppConstants.serverAPI_URL}uploads/${course.thumbnail!}',
+                          imgUrl:
+                              '${AppConstants.uploadURL}/${course.thumbnail!}',
                         ),
                       );
                     },

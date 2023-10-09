@@ -4,9 +4,13 @@ import '../../../common/theme/font_manager.dart';
 import '../../../common/theme/styles_manager.dart';
 import '../../../constants/color.dart';
 
-class SeeAllCourses extends StatelessWidget {
-  const SeeAllCourses({super.key, required this.seeAllCourses,});
-  final Function seeAllCourses;
+class RowText extends StatelessWidget {
+  const RowText(
+      {super.key, required this.actionHandler, required this.title, required this.actionText,});
+
+  final Function actionHandler;
+  final String title;
+  final String actionText;
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +18,16 @@ class SeeAllCourses extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Select your course',
+          title,
           style: getMediumStyle(
             color: Colors.black,
             fontSize: FontSize.s16,
           ),
         ),
         GestureDetector(
-          onTap: ()=>seeAllCourses(),
+          onTap: () => actionHandler(),
           child: Text(
-            'See all',
+            actionText,
             style: getRegularStyle(
               color: AppColors.primaryThreeElementText,
             ),

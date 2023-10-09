@@ -71,7 +71,7 @@ class SingleGridCourse extends StatelessWidget {
                 ),
                 const SizedBox(height: 7),
                 Text(
-                  '$numberOfCourses lessons',
+                  '$numberOfCourses Lessons',
                   style: getBoldStyle(
                     color: AppColors.primarySecondaryElementText,
                   ),

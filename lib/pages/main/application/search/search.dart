@@ -16,7 +16,9 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
 
-  void setFilter() {}
+  void setFilter() {
+    // Todo Filter
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,9 @@ class _SearchScreenState extends State<SearchScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 30.w,
+          leadingWidth: 40.w,
           leading: drawerOpener(context: context),
+          title: const Text('Search Course'),
           actions: const [
             Padding(
               padding: EdgeInsets.only(right: 18),
