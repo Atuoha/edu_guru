@@ -12,7 +12,7 @@ class CourseListState extends Equatable {
   });
 
   factory CourseListState.initial() => CourseListState(
-        courseList: const [],
+        courseList: const <CourseItem>[],
         processingStatus: ProcessingStatus.initial,
         error: CustomError.initial(),
       );

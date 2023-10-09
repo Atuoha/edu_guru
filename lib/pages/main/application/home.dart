@@ -1,6 +1,10 @@
 import 'package:edu_guru/business_logic/carousel_slider/carousel_slider_cubit.dart';
+import 'package:edu_guru/business_logic/course_list/course_list_cubit.dart';
+import 'package:edu_guru/constants/constants.dart';
+import 'package:edu_guru/constants/enums/processing_status.dart';
 import 'package:edu_guru/pages/main/components/course_category_section.dart';
 import 'package:edu_guru/pages/main/components/search_section.dart';
+import 'package:edu_guru/pages/main/widgets/loading.dart';
 import 'package:edu_guru/repositories/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -155,23 +159,49 @@ class _HomeScreenState extends State<HomeScreen> {
                 horizontal: 18,
                 vertical: 10,
               ),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                  childAspectRatio: 1.6,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) => GestureDetector(
-                    onTap: () => null,
-                    child: SingleGridCourse(
-                      courseTitle: 'A course',
-                      numberOfCourses: '101 courses',
-                      imgUrl: Assets.icons.image1.path,
+              sliver: BlocConsumer<CourseListCubit, CourseListState>(
+                listener: (context, state) {
+                  if (state.processingStatus == ProcessingStatus.waiting ||
+                      state.processingStatus == ProcessingStatus.initial) {
+                    const Center(
+                      child: LoadingWidget(
+                        size: 50,
+                      ),
+                    );
+                  } else if (state.processingStatus ==
+                      ProcessingStatus.error) {
+
+                  }
+                },
+                builder: (context, state) {
+                  return SliverGrid.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                      childAspectRatio: 1.6,
                     ),
-                  ),
-                ),
+                    itemCount:
+                        context.read<CourseListCubit>().state.courseList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var course = context
+                          .read<CourseListCubit>()
+                          .state
+                          .courseList[index];
+
+                      return GestureDetector(
+                        onTap: () => null,
+                        child: SingleGridCourse(
+                          size: size,
+                          courseTitle: course.title!,
+                          numberOfCourses: course.lesson_num.toString(),
+                          imgUrl: '${AppConstants.serverAPI_URL}uploads/${course.thumbnail!}',
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             )
           ],
