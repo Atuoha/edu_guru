@@ -12,7 +12,7 @@ Widget courseTabHeader({
   required int index,
   String? title,
   IconData? icon,
-  int? number,
+  String? number,
   required BuildContext context,
 }) {
   var currentTabIndex =
@@ -23,7 +23,7 @@ Widget courseTabHeader({
     width: 100.w,
     decoration: BoxDecoration(
       color: currentTabIndex == index
-          ? AppColors.secondaryColor
+          ? AppColors.secondaryOpacity
           : Colors.transparent,
       borderRadius: BorderRadius.circular(10),
     ),
@@ -32,7 +32,7 @@ Widget courseTabHeader({
           ? Text(
               title!,
               style: getMediumStyle(
-                color: currentTabIndex == index ? Colors.white : Colors.black,
+                color: currentTabIndex == index ? Colors.white : Colors.black38,
                 fontSize: FontSize.s16,
               ),
             )
@@ -41,14 +41,15 @@ Widget courseTabHeader({
               children: [
                 Icon(
                   icon,
-                  color: currentTabIndex == index ? Colors.white : Colors.black,
+                  size: index == 1 ? FontSize.s40: FontSize.s25,
+                  color: currentTabIndex == index ? Colors.white : Colors.black38,
                 ),
                 const SizedBox(width: 5),
                 Text(
                   number.toString(),
                   style: getMediumStyle(
                     color:
-                        currentTabIndex == index ? Colors.white : Colors.black,
+                        currentTabIndex == index ? Colors.white : Colors.black38,
                     fontSize: FontSize.s16,
                   ),
                 ),

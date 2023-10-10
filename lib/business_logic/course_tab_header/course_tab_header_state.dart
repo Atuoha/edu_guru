@@ -26,4 +26,9 @@ class CourseTabHeaderState extends Equatable {
       tabHeaders: tabHeaders ?? this.tabHeaders,
     );
   }
+
+  @override
+  String toString() {
+    return 'CourseTabHeaderState{tabHeaderIndex: $tabHeaderIndex, tabHeaders: $tabHeaders}';
+  }
 }

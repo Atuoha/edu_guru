@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,11 +43,13 @@ class _CoursesScreenState extends State<CoursesScreen> {
           leadingWidth: 40.w,
           leading: drawerOpener(context: context),
           title: const Text('All Courses'),
-          actions: const [
+          actions: [
             Padding(
-              padding: EdgeInsets.only(right: 18),
+              padding: const EdgeInsets.only(right: 18),
               child: Icon(
-                CupertinoIcons.shopping_cart,
+                Platform.isAndroid
+                    ? Icons.shopping_cart_outlined
+                    : CupertinoIcons.shopping_cart,
                 color: AppColors.secondaryColor,
               ),
             ),

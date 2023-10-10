@@ -111,6 +111,7 @@ class SignInRepo {
     EasyLoading.dismiss();
     // set logged in to true
     Global.storageService.setBoolValue(AppConstants.isUserLoggedIn, true);
+
     Navigator.of(context).pushNamedAndRemoveUntil(
       AppRoutes.homeScreen,
       (route) => false,

@@ -58,11 +58,11 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
             buildTabItem(CupertinoIcons.chat_bubble_text, 3),
             buildTabItem(CupertinoIcons.person, 4),
           ] else ...[
-            buildTabItem(Icons.home, 0),
+            buildTabItem(Icons.home_outlined, 0),
             buildTabItem(Icons.search, 1),
-            buildTabItem(Icons.play_arrow, 2),
-            buildTabItem(Icons.chat, 3),
-            buildTabItem(Icons.person, 4),
+            buildTabItem(Icons.play_arrow_outlined, 2),
+            buildTabItem(Icons.chat_outlined, 3),
+            buildTabItem(Icons.person_outline, 4),
           ]
         ],
         onTap: setNewPage,

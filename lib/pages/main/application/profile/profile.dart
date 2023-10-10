@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:edu_guru/common/models/profile_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,30 +54,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     List<ProfileMenu> profileMenus = [
       ProfileMenu(
-        icon: CupertinoIcons.settings,
-        title: 'Settings',
+        icon: Platform.isAndroid ? Icons.person_outline:  CupertinoIcons.person,
+        title: 'Edit Profile',
+        function: navigateToEditProfile,
+      ),
+      ProfileMenu(
+        icon: Platform.isAndroid ? Icons.settings: CupertinoIcons.settings,
+        title: 'App Settings',
         function: navigateToSettings,
       ),
+
       ProfileMenu(
-        icon: Icons.wallet,
-        title: 'Payment Details',
-        function: navigateToPaymentDetails,
+        icon: Platform.isAndroid ? Icons.notifications_active_outlined:CupertinoIcons.bell,
+        title: 'Notifications',
+        function: navigateToBuyCourse,
       ),
       ProfileMenu(
-        icon: Icons.credit_card,
-        title: 'Buy course',
-        function: navigateToBuyCourse,
+        icon:Platform.isAndroid ? Icons.alarm: CupertinoIcons.alarm,
+        title: 'Learning Reminder',
+        function: navigateToLearningReminders,
+      ),
+      ProfileMenu(
+        icon:  Icons.wallet,
+        title: 'Payment Details',
+        function: navigateToPaymentDetails,
       ),
       ProfileMenu(
         icon: CupertinoIcons.heart_fill,
         title: 'Wishlist',
         function: navigateToWishList,
       ),
-      ProfileMenu(
-        icon: CupertinoIcons.alarm,
-        title: 'Learning Reminder',
-        function: navigateToLearningReminders,
-      )
+
     ];
 
     return Scaffold(
@@ -250,16 +259,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           GestureDetector(
                             onTap: () => navigateToMyCourses(),
-                            child: Wrap(
+                            child: const Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
-                                Image.asset(
-                                  Assets.icons.videoCall.path,
+                                Icon(
+                                  CupertinoIcons.videocam_fill,
                                   color: AppColors.primaryFourElementText,
-                                  width: 25.w,
                                 ),
-                                const SizedBox(width: 5),
-                                const Text(
+                                SizedBox(width: 5),
+                                Text(
                                   'My Courses',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,

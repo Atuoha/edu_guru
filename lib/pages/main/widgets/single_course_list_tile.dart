@@ -9,9 +9,11 @@ class CourseListTile extends StatelessWidget {
   const CourseListTile({
     super.key,
     required this.course,
+    this.isSearchPage = false,
   });
 
   final CourseItem course;
+  final bool? isSearchPage;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class CourseListTile extends StatelessWidget {
             color: AppColors.primaryThreeElementText,
           ),
         ),
-        trailing: Text(
+        trailing: isSearchPage!? const Icon(Icons.chevron_right) :Text(
           '\$${course.price}.00',
           style: getMediumStyle(
             color: Colors.black,

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:edu_guru/business_logic/course_list/course_list_cubit.dart';
 import 'package:edu_guru/common/apis/course_api.dart';
 import 'package:edu_guru/global_config/global.dart';
@@ -40,9 +38,10 @@ class HomeRepo {
     } else {
       emitError(
         error: CustomError(
-            errorMsg: 'An error occurred! ${result.msg}',
-            code: result.code.toString(),
-            plugin: ''),
+          errorMsg: 'An error occurred! ${result.msg}',
+          code: result.code.toString(),
+          plugin: '',
+        ),
       );
 
       print('An error occurred! ${result.msg}');

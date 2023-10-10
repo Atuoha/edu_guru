@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +21,12 @@ final List<CourseTabHeader> courseTabHeaders = [
   CourseTabHeader(index: 0, title: 'Author Page'),
   CourseTabHeader(
     index: 1,
-    icon: CupertinoIcons.group,
+    icon: Platform.isAndroid? Icons.groups_outlined: CupertinoIcons.group,
     number: 2,
   ),
   CourseTabHeader(
     index: 2,
-    icon: CupertinoIcons.star,
+    icon:Platform.isAndroid? Icons.star_outline: CupertinoIcons.star,
     number: 0,
   ),
 ];

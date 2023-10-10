@@ -106,6 +106,7 @@ ThemeData getTheme() {
         color: Colors.black,
         size: AppSize.s40,
       ),
+      centerTitle: true,
       color: Colors.transparent,
       elevation: AppSize.s0,
       titleTextStyle: getRegularStyle(
