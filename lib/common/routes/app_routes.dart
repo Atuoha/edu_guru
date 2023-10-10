@@ -1,3 +1,5 @@
+import 'package:edu_guru/common/models/course.dart';
+import 'package:edu_guru/pages/main/application/courses/course_details.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/edit_profile.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/settings.dart';
 import 'package:edu_guru/pages/main/authentication/sign_in.dart';
@@ -16,14 +18,16 @@ class AppRoutes {
   static const String settingScreen = '/settingScreen';
   static const String changePassword = '/changePassword';
   static const String editProfileScreen = '/editProfileScreen';
+  static const String courseDetails = '/courseDetails';
 }
 
 final routes = {
-  AppRoutes.entryScreen: (context)=>const EntryScreen(),
+  AppRoutes.entryScreen: (context) => const EntryScreen(),
   AppRoutes.splashScreen: (context) => const SplashScreen(),
   AppRoutes.signInScreen: (context) => const SignInScreen(),
   AppRoutes.signUpScreen: (context) => const SignUpScreen(),
   AppRoutes.homeScreen: (context) => const MainEntryScreen(),
   AppRoutes.settingScreen: (context) => const SettingsScreen(),
-  AppRoutes.editProfileScreen: (context)=> const EditProfileScreen(),
+  AppRoutes.editProfileScreen: (context) => const EditProfileScreen(),
+  AppRoutes.courseDetails: (context) => CourseDetails(course: CourseItem())
 };

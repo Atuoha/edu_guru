@@ -3,6 +3,7 @@ import 'package:edu_guru/business_logic/carousel_slider/carousel_slider_cubit.da
 import 'package:edu_guru/business_logic/course_list/course_list_cubit.dart';
 import 'package:edu_guru/constants/constants.dart';
 import 'package:edu_guru/constants/enums/processing_status.dart';
+import 'package:edu_guru/pages/main/application/courses/course_details.dart';
 import 'package:edu_guru/pages/main/components/course_category_section.dart';
 import 'package:edu_guru/pages/main/components/search_section.dart';
 import 'package:edu_guru/pages/main/widgets/kcool_alert.dart';
@@ -206,7 +207,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           .courseList[index];
 
                       return GestureDetector(
-                        onTap: () => null,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => CourseDetails(
+                              course: course,
+                            ),
+                          ),
+                        ),
                         child: SingleGridCourse(
                           size: size,
                           courseTitle: course.title!,

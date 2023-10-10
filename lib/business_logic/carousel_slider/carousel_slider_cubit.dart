@@ -12,4 +12,8 @@ class CarouselSliderCubit extends Cubit<CarouselSliderState> {
       state.copyWith(currentCarouselIndex: carouselIndex),
     );
   }
+
+  void setCarousels({required List<CarouselSliderItem> carouselSliders}) {
+    emit(state.copyWith(carouselSliders: carouselSliders));
+  }
 }

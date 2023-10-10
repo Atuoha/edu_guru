@@ -1,6 +1,9 @@
 import 'package:edu_guru/business_logic/change_password/change_password_bloc.dart';
+import 'package:edu_guru/business_logic/course_tab_header/course_tab_header_cubit.dart';
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/business_logic/settings/settings_bloc.dart';
+import 'package:edu_guru/common/models/course.dart';
+import 'package:edu_guru/pages/main/application/courses/course_details.dart';
 import 'package:edu_guru/pages/main/application/main_entry.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/change_password.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/edit_profile.dart';
@@ -85,6 +88,15 @@ class AppPages {
         PageEntity(
           route: AppRoutes.editProfileScreen,
           page: const EditProfileScreen(),
+        ),
+
+        // course details screen
+        PageEntity(
+          route: AppRoutes.courseDetails,
+          page: CourseDetails(course: CourseItem()),
+          bloc: BlocProvider(
+            create: (_) => CourseTabHeaderCubit(),
+          ),
         ),
       ];
 

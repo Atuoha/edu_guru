@@ -8,9 +8,10 @@ import '../../../../constants/color.dart';
 import '../../components/drawer.dart';
 import '../../components/search_section.dart';
 import '../../widgets/course_banner.dart';
-import '../../widgets/course_list_tile.dart';
+import '../../widgets/single_course_list_tile.dart';
 import '../../widgets/drawer_opener.dart';
 import '../../widgets/row_text.dart';
+import 'course_details.dart';
 
 class CoursesScreen extends StatefulWidget {
   const CoursesScreen({super.key});
@@ -88,7 +89,16 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           .state
                           .courseList[index];
 
-                      return CourseListTile(course: course);
+                      return GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => CourseDetails(
+                              course: course,
+                            ),
+                          ),
+                        ),
+                        child: CourseListTile(course: course),
+                      );
                     },
                   ),
                 )
