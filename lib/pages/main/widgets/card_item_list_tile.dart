@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-
-import '../../../common/models/course.dart';
+import '../../../common/models/card_item.dart';
 import '../../../common/theme/styles_manager.dart';
 import '../../../constants/color.dart';
 import '../../../constants/constants.dart';
 
-class CourseListTile extends StatelessWidget {
-  const CourseListTile({
+class CardItemListTile extends StatelessWidget {
+  const CardItemListTile({
     super.key,
-    required this.course,
-    this.isChevronIncluded = false,
+    required this.cardItem,
   });
 
-  final CourseItem course;
-  final bool? isChevronIncluded;
+  final CardItem cardItem;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class CourseListTile extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                '${AppConstants.uploadURL}/${course.thumbnail!}',
+                '${AppConstants.uploadURL}/${cardItem.imgUrl}',
               ),
               fit: BoxFit.cover,
             ),
@@ -38,24 +35,17 @@ class CourseListTile extends StatelessWidget {
           ),
         ),
         title: Text(
-          course.title!,
+          cardItem.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
-          '${course.lesson_num} Lesson',
+          cardItem.subTitle,
           style: getRegularStyle(
             color: AppColors.primaryThreeElementText,
           ),
         ),
-        trailing: isChevronIncluded!
-            ? const Icon(Icons.chevron_right)
-            : Text(
-                '\$${course.price}.00',
-                style: getMediumStyle(
-                  color: Colors.black,
-                ),
-              ),
+        trailing: const Icon(Icons.chevron_right),
       ),
     );
   }

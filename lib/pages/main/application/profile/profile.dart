@@ -99,13 +99,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.only(right: 18),
                 child: Icon(
                   Icons.more_vert,
-                  color: Colors.white,
+                  color: AppColors.secondaryColor,
                   size: 25,
                 ),
               ),
             ],
             automaticallyImplyLeading: false,
-            backgroundColor: AppColors.primaryColor,
+            backgroundColor: AppColors.primaryFourElementText,
             expandedHeight: 150,
             flexibleSpace: LayoutBuilder(
               builder: (context, constraints) {
@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             CircleAvatar(
                               radius: 25,
-                              backgroundColor: AppColors.primaryColor,
+                              backgroundColor: AppColors.primaryFourElementText,
                               backgroundImage:
                                   NetworkImage(homeRepo.userItem.avatar!),
                             ),
@@ -140,14 +140,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 15.h,
                                   width: 15.h,
                                   decoration: BoxDecoration(
-                                    color: AppColors.secondaryOpacity,
+                                    color: AppColors.primaryFourElementText.withOpacity(0.8),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: Image.asset(
                                       Assets.icons.editIcon.path,
-                                      color: Colors.white,
+                                      color: AppColors.secondaryColor,
                                     ),
                                   ),
                                 ),
@@ -171,8 +171,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.primaryColor,
-                          Colors.black26,
+                          AppColors.primaryFourElementText,
+                          Colors.white,
                         ],
                         stops: [0.1, 1],
                         end: Alignment.topRight,
@@ -203,15 +203,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     height: 30.h,
                                     width: 30.h,
                                     decoration: BoxDecoration(
-                                      color: AppColors.secondaryColor
-                                          .withOpacity(0.8),
+                                      color: AppColors.primaryFourElementText.withOpacity(0.8),
                                       shape: BoxShape.circle,
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Image.asset(
                                         Assets.icons.editIcon.path,
-                                        color: Colors.white,
+                                        color: AppColors.secondaryColor,
                                       ),
                                     ),
                                   ),

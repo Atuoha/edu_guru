@@ -9,15 +9,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../business_logic/course_list/course_list_cubit.dart';
+import '../../../../common/models/card_item.dart';
 import '../../../../common/theme/font_manager.dart';
 import '../../../../common/theme/styles_manager.dart';
 import '../../../../constants/color.dart';
+import '../../widgets/card_item_list_tile.dart';
 import '../../widgets/course_details_image.dart';
 import '../../widgets/course_include_list_tile.dart';
 import '../../widgets/course_tab_header_section.dart';
 import '../../widgets/shimmer_component.dart';
 import '../../widgets/single_course_list_tile.dart';
 import '../../widgets/title_text.dart';
+import 'course_videos_tutorial.dart';
 
 class CourseDetails extends StatefulWidget {
   const CourseDetails({super.key, required this.course});
@@ -184,14 +187,15 @@ class _CourseDetailsState extends State<CourseDetails> {
                     return GestureDetector(
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => CourseDetails(
-                            course: course,
-                          ),
+                          builder: (context) => const CourseVideoTutorial(),
                         ),
                       ),
-                      child: CourseListTile(
-                        course: course,
-                        isChevronIncluded: true,
+                      child: CardItemListTile(
+                        cardItem: CardItem(
+                          imgUrl: course.thumbnail!,
+                          title: course.title!,
+                          subTitle: course.title!,
+                        ),
                       ),
                     );
                   },

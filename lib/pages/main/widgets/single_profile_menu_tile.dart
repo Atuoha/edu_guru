@@ -28,12 +28,12 @@ class SingleProfileMenuTile extends StatelessWidget {
             width: 35.w,
             height: 35.h,
             decoration: BoxDecoration(
-              color: AppColors.secondaryOpacity,
+              color: AppColors.primaryFourElementText.withOpacity(0.3),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
               icon,
-              color: Colors.white,
+              // color: Colors.white,
             ),
           ),
           title: Text(
@@ -43,6 +43,8 @@ class SingleProfileMenuTile extends StatelessWidget {
               fontSize: FontSize.s16,
             ),
           ),
+
+          trailing: const Icon(Icons.chevron_right),
         ),
       ),
     );

@@ -41,6 +41,7 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
       const SystemUiOverlayStyle(
         systemNavigationBarColor: AppColors.primaryColor,
         statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
       ),
     );
 
