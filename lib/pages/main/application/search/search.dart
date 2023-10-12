@@ -52,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ],
         ),
-        drawer: buildDrawer(),
+        drawer: const DrawerComponent(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: SingleChildScrollView(
@@ -91,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         child: CourseListTile(
                           course: course,
-                          isSearchPage: true,
+                          isChevronIncluded: true,
                         ),
                       );
                     },

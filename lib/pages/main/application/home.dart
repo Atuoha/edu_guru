@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:redacted/redacted.dart';
+import '../../../common/models/user.dart';
 import '../../../constants/color.dart';
 import '../components/drawer.dart';
 import '../widgets/carousel_slider.dart';
@@ -30,7 +31,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
-  late HomeRepo homeRepo;
+  UserItem userItem = UserItem();
 
   void setFilter() {
     // Todo set filter
@@ -47,8 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    homeRepo = HomeRepo(context: context);
-    homeRepo.init();
+    // homeRepo = HomeRepo(context: context);
+    // homeRepo.init();
+    HomeRepo(context: context).init();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    userItem = HomeRepo(context: context).userItem;
   }
 
   @override
@@ -68,14 +76,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage('${homeRepo.userItem.avatar}'),
+                    image: NetworkImage('${userItem.avatar}'),
                   ),
                 ),
               ),
             ),
           ],
         ),
-        drawer: buildDrawer(),
+        drawer: const DrawerComponent(),
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -91,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hello ${homeRepo.userItem.name}!',
+                          'Hello ${userItem.name}!',
                           style: TextStyle(
                             fontSize: 23.sp,
                             color: AppColors.primaryThreeElementText,

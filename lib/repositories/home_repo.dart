@@ -8,13 +8,21 @@ import '../common/models/custom_error.dart';
 import '../common/models/user.dart';
 
 class HomeRepo {
-  final BuildContext context;
+  late BuildContext context;
 
-  HomeRepo({required this.context});
+  // HomeRepo({required this.context});
 
   UserItem userItem = Global.storageService.getUserProfile();
+  static final HomeRepo _singleton = HomeRepo._internal();
 
-  void init() async {
+  HomeRepo._internal();
+
+  factory HomeRepo({required BuildContext context}) {
+    _singleton.context = context;
+    return _singleton;
+  }
+
+  Future<void> init() async {
     var result = await CourseAPI.loadCourseList();
     if (result.code == 200) {
       // final List<CourseItem> courseList = [];

@@ -9,11 +9,11 @@ class CourseListTile extends StatelessWidget {
   const CourseListTile({
     super.key,
     required this.course,
-    this.isSearchPage = false,
+    this.isChevronIncluded = false,
   });
 
   final CourseItem course;
-  final bool? isSearchPage;
+  final bool? isChevronIncluded;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class CourseListTile extends StatelessWidget {
             color: AppColors.primaryThreeElementText,
           ),
         ),
-        trailing: isSearchPage!? const Icon(Icons.chevron_right) :Text(
+        trailing: isChevronIncluded!? const Icon(Icons.chevron_right) :Text(
           '\$${course.price}.00',
           style: getMediumStyle(
             color: Colors.black,

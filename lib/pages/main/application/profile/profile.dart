@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void navigateToMyCourses() {}
 
-  void navigateToEditProfile(){
+  void navigateToEditProfile() {
     Navigator.of(context).pushNamed(AppRoutes.editProfileScreen);
   }
 
@@ -52,30 +52,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    // menu list
     List<ProfileMenu> profileMenus = [
       ProfileMenu(
-        icon: Platform.isAndroid ? Icons.person_outline:  CupertinoIcons.person,
+        icon: Platform.isAndroid ? Icons.person_outline : CupertinoIcons.person,
         title: 'Edit Profile',
         function: navigateToEditProfile,
       ),
       ProfileMenu(
-        icon: Platform.isAndroid ? Icons.settings: CupertinoIcons.settings,
+        icon: Platform.isAndroid ? Icons.settings : CupertinoIcons.settings,
         title: 'App Settings',
         function: navigateToSettings,
       ),
-
       ProfileMenu(
-        icon: Platform.isAndroid ? Icons.notifications_active_outlined:CupertinoIcons.bell,
+        icon: Platform.isAndroid
+            ? Icons.notifications_active_outlined
+            : CupertinoIcons.bell,
         title: 'Notifications',
         function: navigateToBuyCourse,
       ),
       ProfileMenu(
-        icon:Platform.isAndroid ? Icons.alarm: CupertinoIcons.alarm,
+        icon: Platform.isAndroid ? Icons.alarm : CupertinoIcons.alarm,
         title: 'Learning Reminder',
         function: navigateToLearningReminders,
       ),
       ProfileMenu(
-        icon:  Icons.wallet,
+        icon: Icons.wallet,
         title: 'Payment Details',
         function: navigateToPaymentDetails,
       ),
@@ -84,7 +86,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: 'Wishlist',
         function: navigateToWishList,
       ),
-
     ];
 
     return Scaffold(
@@ -134,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               bottom: 3,
                               right: 5,
                               child: GestureDetector(
-                                onTap: ()=>navigateToEditProfile(),
+                                onTap: () => navigateToEditProfile(),
                                 child: Container(
                                   height: 15.h,
                                   width: 15.h,
@@ -197,7 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 bottom: 3,
                                 right: 5,
                                 child: GestureDetector(
-                                  onTap: ()=>navigateToEditProfile(),
+                                  onTap: () => navigateToEditProfile(),
                                   child: Container(
                                     height: 30.h,
                                     width: 30.h,

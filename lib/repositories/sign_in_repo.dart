@@ -4,6 +4,7 @@ import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/common/models/entities.dart';
 import 'package:edu_guru/constants/constants.dart';
 import 'package:edu_guru/constants/enums/signin_type.dart';
+import 'package:edu_guru/repositories/home_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -200,7 +201,8 @@ class SignInRepo {
       }
     } else {
       EasyLoading.dismiss(); // dismissing loading
-      toastInfo(msg: 'Ops! An error occurred - ${result.msg}.', status: Status.error);
+      toastInfo(
+          msg: 'Ops! An error occurred - ${result.msg}.', status: Status.error);
     }
   }
 }

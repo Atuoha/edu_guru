@@ -13,4 +13,10 @@ class CourseTabHeaderCubit extends Cubit<CourseTabHeaderState> {
 
     print("Index: ${state.tabHeaderIndex}");
   }
+
+  void resetTabHeaderIndex() {
+    emit(
+      state.copyWith(tabHeaderIndex: 0),
+    );
+  }
 }

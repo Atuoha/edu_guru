@@ -55,7 +55,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
             ),
           ],
         ),
-        drawer: buildDrawer(),
+        drawer: const DrawerComponent(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
