@@ -60,6 +60,7 @@ dependencies:
   dio: ^5.3.3
   image_picker: ^1.0.4
   readmore: ^2.2.0
+  shimmer: ^3.0.0
 
 
 dev_dependencies:

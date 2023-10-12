@@ -6,7 +6,7 @@ import '../../../common/theme/styles_manager.dart';
 Widget headerTitle({required String title}) {
   return Column(
     children: [
-      const SizedBox(height: 15),
+      const SizedBox(height: 20),
       Text(
         title,
         style: getBoldStyle(
