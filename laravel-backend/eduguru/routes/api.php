@@ -28,6 +28,8 @@ Route::group(['namespace'=> 'Api'], function(){
 
     Route::group(['middleware'=>['auth:sanctum']], function(){
         Route::any('/courseList',[CourseController::class,'courseList']);
+        Route::any('/courseDetails',[CourseController::class,'courseDetails']);
+        
 
     });
 });

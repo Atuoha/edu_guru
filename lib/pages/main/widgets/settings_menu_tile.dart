@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/color.dart';
+
 class SettingsMenuTile extends StatelessWidget {
   const SettingsMenuTile({
     super.key,
@@ -18,8 +20,9 @@ class SettingsMenuTile extends StatelessWidget {
         title: Text(title),
         trailing: IconButton(
           onPressed: () => fnc(),
-          icon: const Icon(
+          icon:  Icon(
             Icons.chevron_right,
+            color: AppColors.primaryFourElementText,
           ),
         ),
       ),

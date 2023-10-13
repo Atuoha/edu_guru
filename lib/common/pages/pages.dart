@@ -3,6 +3,7 @@ import 'package:edu_guru/business_logic/course_tab_header/course_tab_header_cubi
 import 'package:edu_guru/business_logic/export.dart';
 import 'package:edu_guru/business_logic/settings/settings_bloc.dart';
 import 'package:edu_guru/common/models/course.dart';
+import 'package:edu_guru/pages/main/application/chat/chat_screen.dart';
 import 'package:edu_guru/pages/main/application/courses/course_details.dart';
 import 'package:edu_guru/pages/main/application/main_entry.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/change_password.dart';
@@ -97,6 +98,12 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => CourseTabHeaderCubit(),
           ),
+        ),
+
+        // chat screen screen
+        PageEntity(
+          route: AppRoutes.chatScreen,
+          page: const ChatScreen(),
         ),
       ];
 

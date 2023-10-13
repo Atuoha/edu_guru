@@ -1,24 +1,21 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../common/routes/app_routes.dart';
 import '../../../../constants/color.dart';
 import '../../components/drawer.dart';
+import '../../widgets/chat_contact_list_tile.dart';
 import '../../widgets/drawer_opener.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+class ChatContactScreen extends StatefulWidget {
+  const ChatContactScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatContactScreen> createState() => _ChatContactScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-
-
-
+class _ChatContactScreenState extends State<ChatContactScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: AppBar(
           leadingWidth: 40.w,
           leading: drawerOpener(context: context),
-          title: const Text('Message'),
+          title: const Text('Chat Contact List'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 18),
@@ -40,6 +37,19 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         drawer: const DrawerComponent(),
+        body: SizedBox(
+          height: MediaQuery.sizeOf(context).height / 1.2,
+          child: ListView(
+            children: List.generate(
+              30,
+              (index) => GestureDetector(
+                onTap: () =>
+                    Navigator.of(context).pushNamed(AppRoutes.chatScreen),
+                child: const ChatContactListTile(),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

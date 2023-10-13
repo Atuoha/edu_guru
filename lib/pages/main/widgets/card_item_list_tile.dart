@@ -45,7 +45,10 @@ class CardItemListTile extends StatelessWidget {
             color: AppColors.primaryThreeElementText,
           ),
         ),
-        trailing: const Icon(Icons.chevron_right),
+        trailing: const Icon(
+          Icons.chevron_right,
+          color: AppColors.primaryFourElementText,
+        ),
       ),
     );
   }

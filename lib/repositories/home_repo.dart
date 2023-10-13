@@ -17,11 +17,13 @@ class HomeRepo {
 
   HomeRepo._internal();
 
+  // hom repository factory
   factory HomeRepo({required BuildContext context}) {
     _singleton.context = context;
     return _singleton;
   }
 
+  // home repository initialization
   Future<void> init() async {
     var result = await CourseAPI.loadCourseList();
     if (result.code == 200) {
@@ -57,7 +59,9 @@ class HomeRepo {
   }
 
   // populate course list
-  void populateCourseList({required List<CourseItem> courseList}) {
+  void populateCourseList({
+    required List<CourseItem> courseList,
+  }) {
     context.read<CourseListCubit>().populateCourseList(
           courseList: courseList,
         );

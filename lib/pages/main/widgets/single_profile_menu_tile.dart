@@ -4,7 +4,6 @@ import '../../../common/theme/font_manager.dart';
 import '../../../common/theme/styles_manager.dart';
 import '../../../constants/color.dart';
 
-
 class SingleProfileMenuTile extends StatelessWidget {
   const SingleProfileMenuTile({
     super.key,
@@ -43,8 +42,10 @@ class SingleProfileMenuTile extends StatelessWidget {
               fontSize: FontSize.s16,
             ),
           ),
-
-          trailing: const Icon(Icons.chevron_right),
+          trailing: const Icon(
+            Icons.chevron_right,
+            color: AppColors.primaryFourElementText,
+          ),
         ),
       ),
     );

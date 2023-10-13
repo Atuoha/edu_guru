@@ -49,7 +49,10 @@ class CourseListTile extends StatelessWidget {
           ),
         ),
         trailing: isChevronIncluded!
-            ? const Icon(Icons.chevron_right)
+            ? const Icon(
+                Icons.chevron_right,
+                color: AppColors.primaryFourElementText,
+              )
             : Text(
                 '\$${course.price}.00',
                 style: getMediumStyle(

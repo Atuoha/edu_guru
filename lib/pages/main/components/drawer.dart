@@ -11,6 +11,7 @@ import '../../../constants/color.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../repositories/sign_in_repo.dart';
 import '../widgets/are_you_sure_dialog.dart';
+import '../widgets/drawer_menu_list_tile.dart';
 
 class DrawerComponent extends StatefulWidget {
   const DrawerComponent({super.key});
@@ -59,12 +60,11 @@ class _DrawerComponentState extends State<DrawerComponent> {
 
   @override
   Widget build(BuildContext context) {
-
     // drawer menu list
     final List<DrawerMenu> drawerMenus = [
       DrawerMenu(
         title: 'My Profile',
-        icon: Platform.isAndroid ? Icons.person_outline:  CupertinoIcons.person,
+        icon: Platform.isAndroid ? Icons.person_outline : CupertinoIcons.person,
         actionHandler: goToMyProfile,
       ),
       DrawerMenu(
@@ -74,7 +74,9 @@ class _DrawerComponentState extends State<DrawerComponent> {
       ),
       DrawerMenu(
         title: 'Notifications',
-        icon:  Platform.isAndroid ? Icons.notifications_active_outlined:CupertinoIcons.bell,
+        icon: Platform.isAndroid
+            ? Icons.notifications_active_outlined
+            : CupertinoIcons.bell,
         actionHandler: goToNotifications,
       ),
       DrawerMenu(
@@ -158,20 +160,7 @@ class _DrawerComponentState extends State<DrawerComponent> {
 
                   return GestureDetector(
                     onTap: () => menu.actionHandler(),
-                    child: ListTile(
-                      leading: Container(
-                        height: 40.h,
-                        width: 50.w,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:
-                              AppColors.primaryFourElementText.withOpacity(0.3),
-                        ),
-                        child: Icon(menu.icon),
-                      ),
-                      title: Text(menu.title),
-                      trailing: const Icon(Icons.chevron_right),
-                    ),
+                    child: DrawerMenuListTile(menu: menu),
                   );
                 },
               ),

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/services.dart';
-import 'chat/chat.dart';
+import 'chat/chat_contacts.dart';
 import 'courses/courses.dart';
 import 'home.dart';
 import 'profile/profile.dart';
@@ -25,7 +25,7 @@ class _MainEntryScreenState extends State<MainEntryScreen> {
     HomeScreen(),
     SearchScreen(),
     CoursesScreen(),
-    ChatScreen(),
+    ChatContactScreen(),
     ProfileScreen(),
   ];
 

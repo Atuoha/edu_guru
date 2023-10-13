@@ -1,4 +1,5 @@
 import 'package:edu_guru/common/models/course.dart';
+import 'package:edu_guru/pages/main/application/chat/chat_screen.dart';
 import 'package:edu_guru/pages/main/application/courses/course_details.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/edit_profile.dart';
 import 'package:edu_guru/pages/main/application/profile/preliminary/settings.dart';
@@ -19,6 +20,7 @@ class AppRoutes {
   static const String changePassword = '/changePassword';
   static const String editProfileScreen = '/editProfileScreen';
   static const String courseDetails = '/courseDetails';
+  static const String chatScreen = '/chatScreen';
 }
 
 final routes = {
@@ -29,5 +31,6 @@ final routes = {
   AppRoutes.homeScreen: (context) => const MainEntryScreen(),
   AppRoutes.settingScreen: (context) => const SettingsScreen(),
   AppRoutes.editProfileScreen: (context) => const EditProfileScreen(),
-  AppRoutes.courseDetails: (context) => CourseDetails(course: CourseItem())
+  AppRoutes.courseDetails: (context) => CourseDetails(course: CourseItem()),
+  AppRoutes.chatScreen: (context) => const ChatScreen(),
 };
