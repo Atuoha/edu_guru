@@ -41,14 +41,17 @@ class CourseController extends Controller
 
 
     // course details
-    public function courseDetails()
+    public function courseDetails(Request $request)
     {
+
+        $id =  $request->id;
 
         try{
 
-            $courses = Course::select(
+            $courses = Course::where('id','=',$id)->select(
                 'id',
                 'title',
+                'user_token',
                 'description',
                 'thumbnail',
                 'video',
@@ -70,4 +73,7 @@ class CourseController extends Controller
 
        
     }
+
+
+    
 }

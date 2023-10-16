@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\PayController;
 
 
 /*
@@ -29,7 +30,7 @@ Route::group(['namespace'=> 'Api'], function(){
     Route::group(['middleware'=>['auth:sanctum']], function(){
         Route::any('/courseList',[CourseController::class,'courseList']);
         Route::any('/courseDetails',[CourseController::class,'courseDetails']);
-        
+        Route::any('checkOut',[PayController::class,'checkOut']);
 
     });
 });

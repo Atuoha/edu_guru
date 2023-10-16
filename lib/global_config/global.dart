@@ -10,7 +10,7 @@ class Global {
   static late StorageService storageService;
 
   static Future init() async {
-    Bloc.observer = AppBlocObserver();
+    // Bloc.observer = AppBlocObserver();
 
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(

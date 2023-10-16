@@ -45,6 +45,7 @@ class HomeRepo {
       //   courseList.add(courseItem);
       // }
       populateCourseList(courseList: result.data!);
+
     } else {
       emitError(
         error: CustomError(

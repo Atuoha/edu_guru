@@ -33,9 +33,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   // navigate to change password
-  void navigateToChangePassword(){
-    print('Pressing this');
+  void navigateToChangePassword() {
     Navigator.of(context).pushNamed(AppRoutes.changePassword);
+  }
+
+  // navigateToEditProfile
+  void navigateToEditProfile() {
+    Navigator.of(context).pushNamed(AppRoutes.editProfileScreen);
   }
 
   @override
@@ -75,11 +79,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 10),
               SettingsMenuTile(
                 title: 'Edit Account',
-                fnc: () => null,
+                fnc: navigateToEditProfile,
               ),
               SettingsMenuTile(
                 title: 'Change your password',
-                fnc:  navigateToChangePassword,
+                fnc: navigateToChangePassword,
               ),
               SettingsMenuTile(
                 title: 'Security & privacy',

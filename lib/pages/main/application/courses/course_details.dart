@@ -6,19 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readmore/readmore.dart';
-import 'package:shimmer/shimmer.dart';
 import '../../../../business_logic/course_list/course_list_cubit.dart';
 import '../../../../common/models/card_item.dart';
-import '../../../../common/theme/font_manager.dart';
 import '../../../../common/theme/styles_manager.dart';
 import '../../../../constants/color.dart';
 import '../../widgets/card_item_list_tile.dart';
+import '../../widgets/course_description.dart';
 import '../../widgets/course_details_image.dart';
 import '../../widgets/course_include_list_tile.dart';
 import '../../widgets/course_tab_header_section.dart';
 import '../../widgets/shimmer_component.dart';
-import '../../widgets/single_course_list_tile.dart';
 import '../../widgets/title_text.dart';
 import 'course_videos_tutorial.dart';
 
@@ -32,7 +29,7 @@ class CourseDetails extends StatefulWidget {
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
-  bool isLoading = true;
+  bool isLoading = false;
 
   void buyCourse() {
     // Todo buy course
@@ -57,6 +54,8 @@ class _CourseDetailsState extends State<CourseDetails> {
         });
       },
     );
+
+    print('From Details ${widget.course.isFavorite}');
   }
 
   @override
@@ -96,6 +95,34 @@ class _CourseDetailsState extends State<CourseDetails> {
             color: Colors.black,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: GestureDetector(
+              onTap: () =>
+                  context.read<CourseListCubit>().toggleCourseToFavorite(
+                        id: widget.course.id!,
+                      ),
+              child: Container(
+                height: 30.h,
+                width: 35.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryFourElementText.withOpacity(0.3),
+                ),
+                child: Icon(
+                  widget.course.isFavorite!
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color:  widget.course.isFavorite!
+                      ? Colors.red
+                      : Colors.black38,
+                  size: 23,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -121,24 +148,8 @@ class _CourseDetailsState extends State<CourseDetails> {
               ),
               ShimmerComponent(
                 isLoading: isLoading,
-                child: ReadMoreText(
-                  widget.course.description!,
-                  trimLines: 3,
-                  colorClickableText: Colors.pink,
-                  trimMode: TrimMode.Line,
-                  trimCollapsedText: 'Show more',
-                  trimExpandedText: 'Show less',
-                  style: getRegularStyle(
-                    color: AppColors.primaryThreeElementText,
-                  ),
-                  moreStyle: getMediumStyle(
-                    color: AppColors.primaryThreeElementText,
-                    fontSize: FontSize.s14,
-                  ),
-                  lessStyle: getMediumStyle(
-                    color: AppColors.primaryThreeElementText,
-                    fontSize: FontSize.s14,
-                  ),
+                child: CourseDescription(
+                  description: widget.course.description!,
                 ),
               ),
               const SizedBox(height: 10),

@@ -9,4 +9,6 @@ class AppConstants {
   static const String serverAPI_URL = 'http://10.0.1.57:8000/';
   static const String uploadURL = '${serverAPI_URL}uploads';
 
+  static const String favoriteGIF = 'https://i.pinimg.com/originals/43/cb/59/43cb5919cac5a5e306192a9f8902c579.gif';
+
 }

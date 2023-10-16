@@ -165,6 +165,7 @@ class CourseItem {
   int? follow;
   int? score;
   int? id;
+  bool? isFavorite;
 
   CourseItem({
     this.user_token,
@@ -180,12 +181,14 @@ class CourseItem {
     this.follow,
     this.score,
     this.id,
+    this.isFavorite = false,
   });
 
+  factory CourseItem.initial() => CourseItem();
 
-
-  factory CourseItem.initial()=>CourseItem();
-
+  void toggleFavorite() {
+    isFavorite = !isFavorite!;
+  }
 
   factory CourseItem.fromJson(Map<String, dynamic> json) => CourseItem(
         user_token: json["user_token"],
@@ -196,7 +199,7 @@ class CourseItem {
         price: json["price"].toString(),
         amount_total: json["amount_total"],
         lesson_num: json["lesson_num"],
-    video_length: json["video_length"],
+        video_length: json["video_length"],
         down_num: json["down_num"],
         follow: json["follow"],
         score: json["score"],

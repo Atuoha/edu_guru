@@ -1,7 +1,6 @@
 import 'package:edu_guru/common/app_bloc_providers/app_bloc_providers.dart';
 import 'package:edu_guru/common/pages/pages.dart';
 import 'package:edu_guru/common/theme/app_theme.dart';
-import 'package:edu_guru/common/utils/app_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

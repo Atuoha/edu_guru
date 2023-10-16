@@ -30,10 +30,23 @@ class CourseListCubit extends Cubit<CourseListState> {
         state.copyWith(
           processingStatus: ProcessingStatus.error,
           error: e,
-
         ),
       );
     }
+  }
+
+  // check if course is on favorite
+  bool isCourseOnFav({required int id}) {
+    CourseItem courseItem =
+        state.courseList.firstWhere((course) => course.id == id);
+    return courseItem.isFavorite!;
+  }
+
+  void toggleCourseToFavorite({required int id}) {
+    CourseItem courseItem =
+        state.courseList.firstWhere((course) => course.id == id);
+    courseItem.toggleFavorite();
+
   }
 
   void emitError({required CustomError error}) {
