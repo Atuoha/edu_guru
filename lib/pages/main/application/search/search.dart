@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   searchController: searchController,
                   setFilter: setFilter,
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 RowText(
                   title: 'All courses',
                   actionText: 'See all',
@@ -96,7 +96,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       );
                     },
                   ),
-                )
+                ),
+               const SizedBox(height:20),
               ],
             ),
           ),

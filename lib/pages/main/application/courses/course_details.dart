@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:edu_guru/common/models/course.dart';
 import 'package:edu_guru/common/models/course_includes.dart';
+import 'package:edu_guru/repositories/courses_repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,9 +30,10 @@ class CourseDetails extends StatefulWidget {
 
 class _CourseDetailsState extends State<CourseDetails> {
   bool isLoading = false;
+  late CoursesRepo _courseRepo;
 
   void buyCourse() {
-    // Todo buy course
+    _courseRepo.checkOutCourse(id: widget.course.id);
   }
 
   void goToAuthorsPage() {
@@ -46,16 +47,17 @@ class _CourseDetailsState extends State<CourseDetails> {
     super.initState();
 
     // just testing
-    Timer(
-      const Duration(seconds: 3),
-      () {
-        setState(() {
-          isLoading = false;
-        });
-      },
-    );
+    // Timer(
+    //   const Duration(seconds: 3),
+    //   () {
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //   },
+    // );
 
-    print('From Details ${widget.course.isFavorite}');
+    _courseRepo = CoursesRepo(context: context);
+    _courseRepo.init(id: widget.course.id);
   }
 
   @override
@@ -76,7 +78,7 @@ class _CourseDetailsState extends State<CourseDetails> {
         icon: Platform.isAndroid
             ? Icons.cloud_download
             : CupertinoIcons.cloud_download_fill,
-        data: '${widget.course.video_length} Download Resource',
+        data: '${widget.course.download_resources} Download Resource',
       ),
     ];
 
@@ -96,31 +98,38 @@ class _CourseDetailsState extends State<CourseDetails> {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 18.0),
-            child: GestureDetector(
-              onTap: () =>
-                  context.read<CourseListCubit>().toggleCourseToFavorite(
-                        id: widget.course.id!,
-                      ),
-              child: Container(
-                height: 30.h,
-                width: 35.w,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryFourElementText.withOpacity(0.3),
+          BlocConsumer<CourseListCubit, CourseListState>(
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 18.0),
+                child: GestureDetector(
+                  onTap: () =>
+                      context.read<CourseListCubit>().toggleCourseToFavorite(
+                            id: widget.course.id!,
+                          ),
+                  child: Container(
+                    height: 30.h,
+                    width: 35.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primaryFourElementText.withOpacity(0.3),
+                    ),
+                    child: Icon(
+                      widget.course.isFavorite!
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: widget.course.isFavorite!
+                          ? Colors.red
+                          : Colors.black38,
+                      size: 23,
+                    ),
+                  ),
                 ),
-                child: Icon(
-                  widget.course.isFavorite!
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  color:  widget.course.isFavorite!
-                      ? Colors.red
-                      : Colors.black38,
-                  size: 23,
-                ),
-              ),
-            ),
+              );
+            },
+            listener: (context, state) {
+              print('State changed');
+            },
           )
         ],
       ),

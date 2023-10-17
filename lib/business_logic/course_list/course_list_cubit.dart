@@ -9,6 +9,7 @@ part 'course_list_state.dart';
 class CourseListCubit extends Cubit<CourseListState> {
   CourseListCubit() : super(CourseListState.initial());
 
+  // populate course list
   void populateCourseList({
     required List<CourseItem> courseList,
   }) {
@@ -42,13 +43,28 @@ class CourseListCubit extends Cubit<CourseListState> {
     return courseItem.isFavorite!;
   }
 
+  // toggle course to favorite
   void toggleCourseToFavorite({required int id}) {
+    print('Am here');
     CourseItem courseItem =
         state.courseList.firstWhere((course) => course.id == id);
     courseItem.toggleFavorite();
 
+    List<CourseItem> updatedCourseList = state.courseList.map((course) {
+      if (course.id == id) {
+        return course.copyWith(isFavorite: courseItem.isFavorite!);
+      }
+      return course;
+    }).toList();
+
+    emit(state.copyWith(courseList: updatedCourseList));
   }
 
+  CourseItem findById({required int? id}) {
+    return state.courseList.firstWhere((course) => course.id == id);
+  }
+
+  // emit error
   void emitError({required CustomError error}) {
     emit(
       state.copyWith(
@@ -56,5 +72,10 @@ class CourseListCubit extends Cubit<CourseListState> {
         processingStatus: ProcessingStatus.error,
       ),
     );
+  }
+
+  // populate course detail
+  void setCourseItem({required CourseItem courseItem}) {
+    state.copyWith(courseItem: courseItem);
   }
 }

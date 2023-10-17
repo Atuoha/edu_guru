@@ -25,6 +25,7 @@ class CourseController extends Controller
                 'video_length',
                 'follow',
                 'score',
+                'download_resources'
     
             )->get();
             return response()->json(['code' => 200, 'msg' => 'This is the course list', 'data' => $courses], 200);
@@ -60,9 +61,10 @@ class CourseController extends Controller
                 'video_length',
                 'follow',
                 'score',
+                'download_resources',
     
-            )->get();
-            return response()->json(['code' => 200, 'msg' => 'This is the course list', 'data' => $courses], 200);
+            )->first();
+            return response()->json(['code' => 200, 'msg' => 'course data', 'data' => $courses], 200);
         }catch (\Throwable $th) {
             return response()->json([
                 'code' => 500,

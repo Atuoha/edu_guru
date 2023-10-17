@@ -38,6 +38,7 @@ class CourseController extends AdminController
         $grid->column('score', __('Score'));
         $grid->column('follow', __('Follow'));
         $grid->column('lesson_num', __('Number of Lessons'));
+        $grid->column('download_resources', __('Number of download resources'));
         $grid->column('created_at', __('Created at'));
 
         return $grid;
@@ -58,6 +59,7 @@ class CourseController extends AdminController
         $show->field('score', __('Score'));
         $show->field('follow', __('Follow'));
         $show->field('lesson_num', __('Number of Lessons'));
+        $show->field('download_resources', __('Number of download resources'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -80,6 +82,7 @@ class CourseController extends AdminController
         $user = User::pluck('name', 'token');
         $form->select('user_token', __('Instructor'))->options($user);
         $form->number('lesson_num', __('Number of Lessons'));
+        $form->number('download_resources', __('Number of download resources'));
         $form->display('created_at', __('Created at'));
         $form->display('updated_at', __('Updated at'));
         return $form;

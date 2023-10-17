@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
 class CourseRequestEntity {
   int? id;
@@ -161,7 +162,7 @@ class CourseItem {
   String? amount_total;
   int? lesson_num;
   int? video_length;
-  int? down_num;
+  int? download_resources;
   int? follow;
   int? score;
   int? id;
@@ -177,7 +178,7 @@ class CourseItem {
     this.amount_total,
     this.lesson_num,
     this.video_length,
-    this.down_num,
+    this.download_resources,
     this.follow,
     this.score,
     this.id,
@@ -200,7 +201,7 @@ class CourseItem {
         amount_total: json["amount_total"],
         lesson_num: json["lesson_num"],
         video_length: json["video_length"],
-        down_num: json["down_num"],
+    download_resources: json["download_resources"],
         follow: json["follow"],
         score: json["score"],
         id: json["id"],
@@ -216,9 +217,45 @@ class CourseItem {
         "amount_total": amount_total,
         "lesson_num": lesson_num,
         "video_length": video_length,
-        "down_num": down_num,
+        "download_resources": download_resources,
         "follow": follow,
         "score": score,
         "id": id,
       };
+
+  CourseItem copyWith({
+    String? user_token,
+    String? title,
+    String? description,
+    String? thumbnail,
+    String? video,
+    String? price,
+    String? amount_total,
+    int? lesson_num,
+    int? video_length,
+    int? download_resources,
+    int? follow,
+    int? score,
+    int? id,
+    bool? isFavorite,
+  }) {
+    return CourseItem(
+      user_token: user_token ?? this.user_token,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      thumbnail: thumbnail ?? this.thumbnail,
+      video: video ?? this.video,
+      price: price ?? this.price,
+      amount_total: amount_total ?? this.amount_total,
+      lesson_num: lesson_num ?? this.lesson_num,
+      video_length: video_length ?? this.video_length,
+      download_resources: download_resources ?? this.download_resources,
+      follow: follow ?? this.follow,
+      score: score ?? this.score,
+      id: id ?? this.id,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
+
+
 }

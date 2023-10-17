@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:edu_guru/common/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +93,6 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           .read<CourseListCubit>()
                           .state
                           .courseList[index];
-
                       return GestureDetector(
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
@@ -100,12 +100,19 @@ class _CoursesScreenState extends State<CoursesScreen> {
                               course: course,
                             ),
                           ),
+
                         ),
+
+                        // onTap: () => Navigator.of(context).pushNamed(
+                        //   AppRoutes.courseDetails,
+                        //   arguments: {'id': course.id},
+                        // ),
                         child: CourseListTile(course: course),
                       );
                     },
                   ),
-                )
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
