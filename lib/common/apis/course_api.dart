@@ -1,3 +1,4 @@
+import 'package:edu_guru/common/models/base.dart';
 import 'package:edu_guru/common/models/course.dart';
 import 'package:edu_guru/common/utils/http_util.dart';
 
@@ -22,12 +23,12 @@ class CourseAPI {
   }
 
   // load course details
-  static Future<CourseDetailResponseEntity> checkOutCourse({required CourseRequestEntity param}) async {
+  static Future<BaseResponseEntity> checkOutCourse({required CourseRequestEntity param}) async {
     var header = HttpUtil().getAuthorizationHeader();
     var response =
-    await HttpUtil().get('api/checkOut', headers: header,queryParameter: param.toJson());
+    await HttpUtil().post('api/checkOut', headers: header,queryParameter: param.toJson());
 
     print(response.toString());
-    return CourseDetailResponseEntity.fromJson(response);
+    return BaseResponseEntity.fromJson(response);
   }
 }

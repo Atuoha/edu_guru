@@ -48,15 +48,23 @@ class CoursesRepo {
         );
   }
 
+
+  // checkout course
   void checkOutCourse({required int? id}) async {
     EasyLoading.show();
     CourseRequestEntity courseRequestEntity = CourseRequestEntity();
     courseRequestEntity.id = id;
 
-    var result = await CourseAPI.checkOutCourse(param: courseRequestEntity);
+    var result = await CourseAPI.checkOutCourse(
+      param: courseRequestEntity,
+    );
     if (result.code == 200) {
+      EasyLoading.dismiss();
+      var url = Uri.decodeFull(result.data!);
+      print('URL: $url');
       print(result.data);
     } else {
+      EasyLoading.dismiss();
       toastInfo(
         msg: 'An error occurred! Code: ${result.code}',
         status: Status.error,
